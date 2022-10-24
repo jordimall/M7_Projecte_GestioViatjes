@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::get('/', function () {
 
 // Controladors Users
 Route::get('/users',[UserController::class, 'index']);
+Route::get('/publications',[PublicationController::class, 'index']);

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('likes');
             $table->string('description');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }

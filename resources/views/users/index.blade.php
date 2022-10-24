@@ -31,6 +31,6 @@
         @endforeach
     </table>
 
-    {{-- {{ $poders->links('pagination::bootstrap-4') }} --}}
+    {{-- {{ $users->links('pagination::bootstrap-4') }} --}}
 
 @endsection

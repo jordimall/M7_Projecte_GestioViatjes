@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->integer('like');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('publication_id')->constrained();
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $publicaton->id }}</td>
                 <td><img src="{{ $publicaton->url }}"></td>
-                <td>{{ $publicaton->likes }}</td>
+                <td>{{ $publicaton->like }}</td>
                 <td>{{ $publicaton->description }}</td>
                 <td>{{ $publicaton->user_id }}</td>
                 <td>{{ $publicaton->created_at }}</td>

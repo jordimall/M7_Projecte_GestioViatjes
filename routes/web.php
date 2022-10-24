@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,5 @@ Route::get('/', function () {
 // Controladors Users
 Route::get('/users',[UserController::class, 'index']);
 Route::get('/publications',[PublicationController::class, 'index']);
+Route::get('/comments',[CommentController::class, 'index']);
+Route::get('/categories',[CategoryController::class, 'index']);

@@ -23,6 +23,14 @@ Route::get('/', function () {
 
 // Controladors Users
 Route::get('/users',[UserController::class, 'index']);
-Route::get('/publications',[PublicationController::class, 'index']);
+
+// Controlador Publicactions
+Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');
+Route::get('/publications/show/{publication}',[PublicationController::class, 'show'])->name('publications.show');
+
+// Controlador Comments
 Route::get('/comments',[CommentController::class, 'index']);
+
+// Controlador Categories
 Route::get('/categories',[CategoryController::class, 'index']);
+

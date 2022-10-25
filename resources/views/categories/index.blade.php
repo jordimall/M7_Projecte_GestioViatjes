@@ -3,7 +3,7 @@
 
 <h1>Categories</h1>
 
-    <a href="/categories/formnew">Crear Usuari</a>
+    <a href="/categories/formnew">Crear Categoria</a>
     <table border=1>
         <thead>
         <tr>

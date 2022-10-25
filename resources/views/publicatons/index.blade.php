@@ -3,17 +3,18 @@
 
     <h1>Publicacions</h1>
 
-    <a href="/publicatons/formnew">Crear Usuari</a>
+    <a href="/publicatons/formnew">Crear publicació</a>
     <table border=1>
         <thead>
         <tr>
-            <td>ID</td>
-            <td>imatge</td>
-            <td>likes</td>
-            <td>descripció</td>
-            <td>id del usuari</td>
-            <td>Data de creació</td>
-            <td>Data d'actualització</td>
+            <th>ID</th>
+            <th>imatge</th>
+            <th>likes</th>
+            <th>descripció</th>
+            <th>id del usuari</th>
+            <th>Data de creació</th>
+            <th>Data d'actualització</th>
+            <th colspan="4">Operacions</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                 <td>{{ $publicaton->user_id }}</td>
                 <td>{{ $publicaton->created_at }}</td>
                 <td>{{ $publicaton->updated_at }}</td>
+                <td><a href="/publications/show/{{ $publicaton->id }}">Mostrar</a></td>
                 <td><a href="/publicatons/delete/{{ $publicaton->id }}">Esborrar</a></td>
                 <td><a href="/publicatons/update/{{ $publicaton->id }}">Actualitzar</a></td>
             </tr>

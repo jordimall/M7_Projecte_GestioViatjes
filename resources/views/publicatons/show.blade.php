@@ -39,6 +39,13 @@
     </div>
 
     <strong>Comentaris</strong>
+    @foreach($publication->comments as $comment)
+    <div>
+        <p>{{ $comment->description }}</p>
+        <p>{{ $comment->user->username }}</p>
+        <p>{{ $comment->like }}</p>
+    </div>
    
+@endforeach
         
 @endsection

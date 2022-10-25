@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Publication;
-use app\Models\Comment;
 
 class PublicationController extends Controller
 {

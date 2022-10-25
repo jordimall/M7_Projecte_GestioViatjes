@@ -24,4 +24,8 @@ class Publication extends Model
             'categories_publications'
         );
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

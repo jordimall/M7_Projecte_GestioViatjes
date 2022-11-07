@@ -34,3 +34,7 @@ Route::get('/comments',[CommentController::class, 'index']);
 // Controlador Categories
 Route::get('/categories',[CategoryController::class, 'index']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

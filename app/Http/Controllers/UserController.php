@@ -19,4 +19,10 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
+    public function show(User $user)
+    {
+        $user->load('comments');
+        return view('users.show', compact('user'));
+    }
+
 }

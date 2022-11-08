@@ -22,7 +22,8 @@ Route::get('/', function () {
 });
 
 // Controladors Users
-Route::get('/users',[UserController::class, 'index']);
+Route::get('/users',[UserController::class, 'index'])->name('users.index');
+Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
 
 // Controlador Publicactions
 Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');
@@ -33,4 +34,3 @@ Route::get('/comments',[CommentController::class, 'index']);
 
 // Controlador Categories
 Route::get('/categories',[CategoryController::class, 'index']);
-

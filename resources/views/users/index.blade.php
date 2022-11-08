@@ -25,6 +25,7 @@
                 <td>{{ $user->password }}</td>
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->updated_at }}</td>
+                <td><a href="/users/show/{{ $user->id }}">Mostrar</a></td>
                 <td><a href="/users/delete/{{ $user->id }}">Esborrar</a></td>
                 <td><a href="/users/update/{{ $user->id }}">Actualitzar</a></td>
             </tr>

@@ -33,4 +33,13 @@ Route::get('/publications/show/{publication}',[PublicationController::class, 'sh
 Route::get('/comments',[CommentController::class, 'index']);
 
 // Controlador Categories
+<<<<<<< HEAD
 Route::get('/categories',[CategoryController::class, 'index']);
+=======
+Route::get('/categories',[CategoryController::class, 'index']);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+>>>>>>> 453635e7c0497fe29c5bfb558000a5aa1124514f

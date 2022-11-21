@@ -54,26 +54,7 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     // Route::post('/comments/update/{comment}',[CommentController::class, 'update'])->name('comments.update');
     // Route::post('/comments/delete/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');
 
-    // Route::group(['middleware' => 'is_admin'], function () { // usuari administrador
-
-    //     Controladors Users
-    //     Route::get('/users',[UserController::class, 'index'])->name('users.index');
-    //     Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');
-
-    //     Controlador Categories
-    //     Route::get('/categories',[CategoryController::class, 'index']);
-    //     Route::get('/categories/formnew',[CategoryController::class, 'create'])->name('categories.formnew');
-    //     Route::post('/categories/save',[CategoryController::class, 'store'])->name('categories.save');
-    //     Route::get('/categories/update/{comment}',[CategoryController::class, 'edit'])->name('categories.edit');
-    //     Route::post('/categories/update/{comment}',[CategoryController::class, 'update'])->name('categories.update');
-    //     Route::post('/categories/delete/{comment}',[CategoryController::class, 'destroy'])->name('categories.destroy');
-
-    //     Controlador Comments
-    //     Route::get('/comments',[CommentController::class, 'index']);
-
-    // });
-
-    Route::group(['middleware' => 'role:admin'], function () { // usuari administrador
+    Route::group(['middleware' => 'role:admin'], function () {
 
         // Controladors Users
         Route::get('/users',[UserController::class, 'index'])->name('users.index');

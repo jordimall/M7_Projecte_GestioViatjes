@@ -7,10 +7,49 @@ use App\Models\Publication;
 
 class PublicationController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('is_admin');
+    }
+
     public function index()
     {
-        $publicatons = Publication::all();
+        $publicatons = Publication::paginate(5);
         return view('publicatons.index', compact('publicatons'));
+    }
+
+    public function create()
+    {
+        return view('publicatons.new');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        $request->validate(
+
+            [
+                'description' => 'required | min:3'
+            ]
+
+        );
+        $publicaton = new Publication;
+        $publicaton->name =  $request->name;
+        $publicaton->save();
+
+        return redirect('/planet');
     }
 
     public function show(Publication $publication)

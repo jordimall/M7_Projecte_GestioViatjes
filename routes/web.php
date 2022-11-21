@@ -54,7 +54,6 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     // Route::post('/comments/update/{comment}',[CommentController::class, 'update'])->name('comments.update');
     // Route::post('/comments/delete/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');
 
-    // Route::group(['middleware' => 'is_admin'], function () { // usuari administrador
     Route::group(['middleware' => 'role:admin'], function () {
 
         // Controladors Users

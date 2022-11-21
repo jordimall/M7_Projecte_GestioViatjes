@@ -22,7 +22,8 @@ Route::get('/', function () {
 });
 
 // Controladors Users
-Route::get('/users',[UserController::class, 'index']);
+Route::get('/users',[UserController::class, 'index'])->name('users.index');
+Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
 
 // Controlador Publicactions
 Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');
@@ -32,9 +33,13 @@ Route::get('/publications/show/{publication}',[PublicationController::class, 'sh
 Route::get('/comments',[CommentController::class, 'index']);
 
 // Controlador Categories
+<<<<<<< HEAD
+Route::get('/categories',[CategoryController::class, 'index']);
+=======
 Route::get('/categories',[CategoryController::class, 'index']);
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+>>>>>>> 453635e7c0497fe29c5bfb558000a5aa1124514f

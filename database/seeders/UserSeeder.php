@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'username'    => 'marcotl',
                 'email' => 'marcotl@gmail.com',
                 'password'    => Hash::make('7w2^v@2&Ik6m'),
+                'role_id'   => 1,
             ],
             [
                 'name'  => 'Rodrigo',
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
                 'username'    => 'rodrigocs',
                 'email' => 'rodrigocs@gmail.com',
                 'password'    => Hash::make('EZ9%5Z7rp70o'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Claudia',
@@ -37,6 +39,7 @@ class UserSeeder extends Seeder
                 'username'    => 'claudiavo',
                 'email' => 'claudiavo@gmail.com',
                 'password'    => Hash::make('9YI7z%&R^TK8'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Lorena',
@@ -44,6 +47,7 @@ class UserSeeder extends Seeder
                 'username'    => 'lorenajl',
                 'email' => 'lorenajl@gmail.com',
                 'password'    => Hash::make('48vp0Cg^^DJK'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Remigio',
@@ -51,6 +55,7 @@ class UserSeeder extends Seeder
                 'username'    => 'remigiopa',
                 'email' => 'remigiopa@gmail.com',
                 'password'    => Hash::make('V9d!v%se224y'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Jordi',
@@ -58,6 +63,7 @@ class UserSeeder extends Seeder
                 'username'    => 'jordipm',
                 'email' => 'jordipm@gmail.com',
                 'password'    => Hash::make('&G47h9K01spb'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Alonso',
@@ -65,6 +71,7 @@ class UserSeeder extends Seeder
                 'username'    => 'alonsoii',
                 'email' => 'alonsoii@gmail.com',
                 'password'    => Hash::make('PnTnm^9Nr17F'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Jenny',
@@ -72,6 +79,7 @@ class UserSeeder extends Seeder
                 'username'    => 'jennypc',
                 'email' => 'jennypc@gmail.com',
                 'password'    => Hash::make('yAHi0593Wm!g'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Gregorio',
@@ -79,6 +87,7 @@ class UserSeeder extends Seeder
                 'username'    => 'gregoriosb',
                 'email' => 'gregoriosb@gmail.com',
                 'password'    => Hash::make('8%q7lv032RdR'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Begoña',
@@ -86,6 +95,7 @@ class UserSeeder extends Seeder
                 'username'    => 'begoñabg',
                 'email' => 'begoñabg@gmail.com',
                 'password'    => Hash::make('7&8q8%vZVCil'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Imelda',
@@ -93,6 +103,7 @@ class UserSeeder extends Seeder
                 'username'    => 'imeldasc',
                 'email' => 'imeldasc@gmail.com',
                 'password'    => Hash::make('@dGzFJz!907S'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Úrsula',
@@ -100,6 +111,7 @@ class UserSeeder extends Seeder
                 'username'    => 'ursuladb',
                 'email' => 'ursuladb@gmail.com',
                 'password'    => Hash::make('igF1kP&R&8W5'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Marcos',
@@ -107,6 +119,7 @@ class UserSeeder extends Seeder
                 'username'    => 'marcosbc',
                 'email' => 'marcosbc@gmail.com',
                 'password'    => Hash::make('4000JLWT#qht'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Sebastián',
@@ -114,6 +127,7 @@ class UserSeeder extends Seeder
                 'username'    => 'sebastiancm',
                 'email' => 'sebastiancm@gmail.com',
                 'password'    => Hash::make('*uab311Ccdli'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Alex',
@@ -121,6 +135,7 @@ class UserSeeder extends Seeder
                 'username'    => 'alexcr',
                 'email' => 'alexcr@gmail.com',
                 'password'    => Hash::make('7D73$9aaEg^0'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Ainara',
@@ -128,6 +143,7 @@ class UserSeeder extends Seeder
                 'username'    => 'ainarafg',
                 'email' => 'ainarafg@gmail.com',
                 'password'    => Hash::make('qM9YCz0@%06d'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Nico',
@@ -135,6 +151,7 @@ class UserSeeder extends Seeder
                 'username'    => 'nicocg',
                 'email' => 'nicocg@gmail.com',
                 'password'    => Hash::make('Dg4b35*o2#QD'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Aarón',
@@ -142,6 +159,7 @@ class UserSeeder extends Seeder
                 'username'    => 'aaronbm',
                 'email' => 'aaronbm@gmail.com',
                 'password'    => Hash::make('3LR5A4$6EQzL'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Ismael',
@@ -149,6 +167,7 @@ class UserSeeder extends Seeder
                 'username'    => 'ismaelrb',
                 'email' => 'ismaelrb@gmail.com',
                 'password'    => Hash::make('#zB55D3N*5%8'),
+                'role_id' => 0,
             ],
             [
                 'name'  => 'Mireia',
@@ -156,6 +175,7 @@ class UserSeeder extends Seeder
                 'username'    => 'mireiasl',
                 'email' => 'mireiasl@gmail.com',
                 'password'    => Hash::make('%Ml475*eH17n'),
+                'role_id' => 0,
             ],
         ];
 

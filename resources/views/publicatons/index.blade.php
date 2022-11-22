@@ -2,8 +2,8 @@
 @section('content')
     <h1>Publicacions</h1>
 
-    <a href="/publicatons/formnew">Crear publicació</a>
-    <table border=1>
+    <a href="/publicatons/formnew" class="btn btn-primary stretched-link">Crear publicació</a>
+    <!-- <table border=1>
         <thead>
             <tr>
                 <th>ID</th>
@@ -20,7 +20,7 @@
             @foreach ($publicatons as $publicaton)
                 <tr>
                     <td>{{ $publicaton->id }}</td>
-                    <td><img src="{{ $publicaton->url }}"></td>
+                    <td><img src="{{ $publicaton->url }}" class="w-100"></td>
                     <td>{{ $publicaton->like }}</td>
                     <td>{{ $publicaton->description }}</td>
                     <td>{{ $publicaton->user_id }}</td>
@@ -32,11 +32,22 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> -->
+
+    <div id="showcase" class="pt-5 pb-5">
+      <div class="container">
+      @foreach ($publicatons as $publicaton)
+        <div class="row">
+          <div class="col bg-white pr-0">
+            <a href="/publications/show/{{ $publicaton->id }}" class=" stretched-link"> <img src="{{ $publicaton->url }}" alt="" class="w-100 img-rounded"></a>
+          </div>
+        </div>
+        @endforeach
+      </div>
+    </div>
 
     <div>
         {{ $publicatons->links('pagination::bootstrap-4') }}
     </div>
 
-    {{-- {{ $publicaton->links('pagination::bootstrap-4') }} --}}
 @endsection

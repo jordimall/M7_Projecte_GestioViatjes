@@ -17,20 +17,17 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Controlador Publicactions
 Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');
 Route::get('/publications/show/{publication}',[PublicationController::class, 'show'])->name('publications.show');
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/home', function () {
+//     return view('welcome');
+// });
 
 // Per a utilitzar els MIDDLEWARES
 Route::group(['middleware' => 'auth'], function () { // usuari autentificat

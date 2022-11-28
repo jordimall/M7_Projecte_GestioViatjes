@@ -40,7 +40,7 @@
         @foreach ($publications as $publication)
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ $publication->url }}" class="card-img-top" alt="...">
+                    <img src="{{ $publication->url }}" class="rounded d-block m-l-none" alt="..."style="height: 200px">
                     <div class="card-body">
                         <h5 class="card-title">{{ $publication->title }}</h5>
                         <p class="card-text">{{ $publication->description }}</p>

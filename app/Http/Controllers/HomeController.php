@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $publications = Publication::inRandomOrder()->limit(5)->get();
+        $publications = Publication::inRandomOrder()->limit(8)->get();
         return view('welcome',compact('publications'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Psy\Readline\Hoa\Console;
+use App\Models\Publication;
 
 class HomeController extends Controller
 {
@@ -14,6 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $publications = Publication::inRandomOrder()->limit(5)->get();
+        return view('welcome',compact('publications'));
     }
 }

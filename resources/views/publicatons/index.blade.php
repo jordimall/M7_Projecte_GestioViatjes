@@ -4,6 +4,7 @@
 
     <a href="/publicatons/formnew">Crear publicació</a>
     {{-- <table border=1>
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ $publicaton->id }}</td>
                     <td><img class="img-thumbnail rounded mx-auto d-block" src="{{ $publicaton->url }}"></td>
+
                     <td>{{ $publicaton->like }}</td>
                     <td>{{ $publicaton->description }}</td>
                     <td>{{ $publicaton->user_id }}</td>
@@ -57,4 +59,5 @@
     </div>
 
     {{-- {{ $publicaton->links('pagination::bootstrap-4') }} --}}
+
 @endsection

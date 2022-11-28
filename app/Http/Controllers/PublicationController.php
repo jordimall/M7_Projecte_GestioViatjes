@@ -7,10 +7,11 @@ use App\Models\Publication;
 
 class PublicationController extends Controller
 {
+
     public function index()
     {
-        $publicatons = Publication::paginate(5);
-        return view('publicatons.index', compact('publicatons'));
+        $publicatons = Publication::paginate(10);
+        return view('publications.index', compact('publications'));
     }
 
     public function create()

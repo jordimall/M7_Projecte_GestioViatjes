@@ -69,16 +69,29 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                            <div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                                <a class="dropdown-item" href="/users/show/{{ Auth::user()->id }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('perfil-form').submit();">
+                                    {{ __('Perfil') }}
+                                </a>
+
+                                <form id="perfil-form" action="/users/show/{{ Auth::user()->id }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                         </div>
+                        
                     </li>
                 @endguest
             </ul>

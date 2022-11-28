@@ -2,8 +2,9 @@
 @section('content')
     <h1>Publicacions</h1>
 
-    <a href="/publicatons/formnew" class="btn btn-primary stretched-link">Crear publicació</a>
-    <!-- <table border=1>
+    <a href="/publicatons/formnew">Crear publicació</a>
+    {{-- <table border=1>
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -20,7 +21,8 @@
             @foreach ($publicatons as $publicaton)
                 <tr>
                     <td>{{ $publicaton->id }}</td>
-                    <td><img src="{{ $publicaton->url }}" class="w-100"></td>
+                    <td><img class="img-thumbnail rounded mx-auto d-block" src="{{ $publicaton->url }}"></td>
+
                     <td>{{ $publicaton->like }}</td>
                     <td>{{ $publicaton->description }}</td>
                     <td>{{ $publicaton->user_id }}</td>
@@ -32,6 +34,30 @@
                 </tr>
             @endforeach
         </tbody>
-    </table> -->
+    </table> --}}
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach ($publicatons as $publicaton)
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ $publicaton->url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's
+                            content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+
+    <div>
+        {{ $publicatons->links('pagination::bootstrap-5') }}
+    </div>
+
+    {{-- {{ $publicaton->links('pagination::bootstrap-4') }} --}}
 
 @endsection

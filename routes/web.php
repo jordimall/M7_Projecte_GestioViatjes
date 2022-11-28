@@ -25,15 +25,11 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/home', function () {
-//     return view('welcome');
-// });
-
 // Per a utilitzar els MIDDLEWARES
 Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
     // Controladors Users
-    Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
+    Route::post('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
     // Route::get('/users/update/{user}',[UserController::class, 'edit'])->name('users.edit');
     // Route::post('/users/update/{user}',[UserController::class, 'update'])->name('users.update');
 

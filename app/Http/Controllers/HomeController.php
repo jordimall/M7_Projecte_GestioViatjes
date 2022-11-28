@@ -8,7 +8,6 @@ use App\Models\Publication;
 
 class HomeController extends Controller
 {
-
     /**
      * Show the application dashboard.
      *

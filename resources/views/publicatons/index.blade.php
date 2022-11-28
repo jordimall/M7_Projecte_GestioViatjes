@@ -34,20 +34,4 @@
         </tbody>
     </table> -->
 
-    <div id="showcase" class="pt-5 pb-5">
-      <div class="container">
-      @foreach ($publicatons as $publicaton)
-        <div class="row">
-          <div class="col bg-white pr-0">
-            <a href="/publications/show/{{ $publicaton->id }}" class=" stretched-link"> <img src="{{ $publicaton->url }}" alt="" class="w-100 img-rounded"></a>
-          </div>
-        </div>
-        @endforeach
-      </div>
-    </div>
-
-    <div>
-        {{ $publicatons->links('pagination::bootstrap-4') }}
-    </div>
-
 @endsection

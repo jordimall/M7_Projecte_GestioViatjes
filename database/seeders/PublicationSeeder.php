@@ -21,120 +21,140 @@ class PublicationSeeder extends Seeder
                 'like'  => 0,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 1,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/aqueduct-g6ff5e094b_1280.jpg',
                 'like'  => 0,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 2,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/bridge-g888e1bedb_1280.jpg',
                 'like'  => 2,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 3,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/cathedral-gcc50d909e_1280.jpg',
                 'like'  => 0,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 4,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/girona-gdc8a6153e_1280.jpg',
                 'like'  => 4,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 5,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/la-seu-vella-g955b028e7_1280.jpg',
                 'likes'  => 7,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 6,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/prague-g4f1a6caa7_1280.jpg',
                 'like'  => 5,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 7,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/ships-ge61fe604c_1280.jpg',
                 'like'  => 14,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 8,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/tarragona-gc6ae00816_1280.jpg',
                 'like'  => 23,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 9,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/ciutat/travel-gafec7ff82_1280.jpg',
                 'like'  => 31,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 10,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/beach-g3d05d4770_1280.jpg',
                 'like'  => 0,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 11,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/boat-g75aba84d5_1280.jpg',
                 'like'  => 28,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 12,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/cadaques-g370cf4faf_1280.jpg',
                 'like'  => 19,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 13,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/girl-gb3bac375c_1280.jpg',
                 'like'  => 37,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 14,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/landscape-gf452351c4_1280.jpg',
                 'like'  => 16,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 15,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/sant-joan-g4934501f6_1280.jpg',
                 'like'  => 47,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 16,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/sea-g469c4b797_1280.jpg',
                 'like'  => 35,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 17,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/sea-g597e9138e_1280.jpg',
                 'like'  => 0,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 18,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/sea-g15309faa5_1280.jpg',
                 'like'  => 10,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 19,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/costa/sea-g28307412f_1280.jpg',
                 'like'  => 50,
                 'description'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare suscipit libero.',
                 'user_id'  => 20,
+                'title' => 'Consectetur Adipiscing'
             ],
             [
                 'url'  => 'url_image/esportsAventura/adventure-g76df1e3ef_1280.jpg',

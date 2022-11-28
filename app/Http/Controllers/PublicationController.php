@@ -10,13 +10,13 @@ class PublicationController extends Controller
 
     public function index()
     {
-        $publicatons = Publication::paginate(10);
+        $publications = Publication::paginate(10);
         return view('publications.index', compact('publications'));
     }
 
     public function create()
     {
-        return view('publicatons.new');
+        return view('publications.new');
     }
 
     /**
@@ -46,6 +46,6 @@ class PublicationController extends Controller
     {
         $publication->load("categories");
 
-        return view('publicatons.show', compact('publication'));
+        return view('publications.show', compact('publication'));
     }
 }

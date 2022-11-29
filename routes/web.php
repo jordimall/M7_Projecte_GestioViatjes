@@ -41,8 +41,8 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     // Route::post('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
 
     // Controlador Comments
-    // Route::get('/comments/formnew',[CommentController::class, 'create'])->name('comments.formnew');
-    // Route::post('/comments/save',[CommentController::class, 'store'])->name('comments.save');
+    Route::get('/comments/formnew/{id}',[CommentController::class, 'create'])->name('comments.formnew');
+    Route::post('/comments/save/{id}',[CommentController::class, 'store'])->name('comments.save');
     // Route::get('/comments/update/{comment}',[CommentController::class, 'edit'])->name('comments.edit');
     // Route::post('/comments/update/{comment}',[CommentController::class, 'update'])->name('comments.update');
     // Route::post('/comments/delete/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');

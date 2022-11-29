@@ -1,5 +1,6 @@
 @extends('plantilla')
 @section('content')
+
     <h1 class="pb-2">Publicacions</h1>
 
     {{--<a href="/publications/formnew">Crear publicació</a>
@@ -60,4 +61,5 @@
     </div>
 
     {{-- {{ $publicaton->links('pagination::bootstrap-4') }} --}}
+
 @endsection

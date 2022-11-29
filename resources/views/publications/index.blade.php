@@ -1,10 +1,10 @@
 @extends('plantilla')
 @section('content')
-    <h1>Publicacions</h1>
 
-    <a href="/publicatons/formnew">Crear publicació</a>
-    {{-- <table border=1>
+    <h1 class="pb-2">Publicacions</h1>
 
+    {{--<a href="/publications/formnew">Crear publicació</a>
+     <table border=1>
         <thead>
             <tr>
                 <th>ID</th>
@@ -22,7 +22,6 @@
                 <tr>
                     <td>{{ $publicaton->id }}</td>
                     <td><img class="img-thumbnail rounded mx-auto d-block" src="{{ $publicaton->url }}"></td>
-
                     <td>{{ $publicaton->like }}</td>
                     <td>{{ $publicaton->description }}</td>
                     <td>{{ $publicaton->user_id }}</td>
@@ -40,11 +39,16 @@
         @foreach ($publications as $publication)
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ $publication->url }}" class="rounded d-block m-l-none" alt="..."style="height: 200px">
+                    <img src="{{ $publication->url }}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ $publication->title }}</h5>
-                        <p class="card-text">{{ $publication->description }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text">{{ Str::limit($publication->description, 100) }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {{ $publication->created_at->day }}/{{ $publication->created_at->month }}/{{ $publication->created_at->year }}
+                            </small>
+                        </p>
+                        <a href="/publications/show/{{ $publication->id }}" class="w-100 btn btn-dark">Mostrar</a>
                     </div>
                 </div>
             </div>

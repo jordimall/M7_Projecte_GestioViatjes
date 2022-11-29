@@ -1,6 +1,10 @@
 @extends('plantilla')
+
 @section('content')
-<h1>Agencia de Viatges App</h1>
+  <h1>Agencia de Viatges App</h1>
+
+  <div id="gallery" class="mt-5">
+    <div class="container">
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
       @foreach ($publications as $publicaton)
@@ -18,9 +22,8 @@
             <a href="/publications/show/{{ $publicaton->id }}" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
-      </div>
+
       @endforeach
     </div>
-
-
+  </div>
 @endsection

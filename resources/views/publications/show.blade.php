@@ -25,6 +25,7 @@
         <div class="container">
             <div class="row">
                 <strong>Comentaris</strong>
+                <a href="/comments/formnew/{{ $publication->id }}" class="btn btn-primary"> Escriu Comentari</a>
                 @foreach ($publication->comments as $comment)
                     <div>
                         <p>{{ $comment->description }}</p>

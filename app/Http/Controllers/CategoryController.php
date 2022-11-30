@@ -34,7 +34,7 @@ class CategoryController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required | min:3',
             ]
 
         );

@@ -57,9 +57,9 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
         Route::get('/categories',[CategoryController::class, 'index']);
         Route::get('/categories/formnew',[CategoryController::class, 'create'])->name('categories.formnew');
         Route::post('/categories/save',[CategoryController::class, 'store'])->name('categories.save');
-        Route::get('/categories/update/{comment}',[CategoryController::class, 'edit'])->name('categories.edit');
-        Route::post('/categories/update/{comment}',[CategoryController::class, 'update'])->name('categories.update');
-        Route::post('/categories/delete/{comment}',[CategoryController::class, 'destroy'])->name('categories.destroy');
+        Route::get('/categories/update/{category}',[CategoryController::class, 'edit'])->name('categories.edit');
+        Route::post('/categories/update/{category}',[CategoryController::class, 'update'])->name('categories.update');
+        Route::get('/categories/delete/{category}',[CategoryController::class, 'destroy'])->name('categories.destroy');
 
         // Controlador Comments
         Route::get('/comments',[CommentController::class, 'index']);

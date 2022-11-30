@@ -57,7 +57,7 @@ class CommentController extends Controller
     {
         //$planet = Planet::findOrFail($id);
         
-        return view('comments.update',compact('comment'));
+        return view('comments.update', compact('comment'));
     }
 
     /**

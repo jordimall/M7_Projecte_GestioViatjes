@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label for="name">Modifica la categoria</label>
-                    <input type="name" name="description" class="form-control"
+                    <input type="text" name="name" class="form-control"
                         value="{{ old('name', $category->name) }}">
                 </div>
 

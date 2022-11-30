@@ -48,7 +48,7 @@
                         <p class="card-text">{{ Str::limit($publication->description, 95) }}</p>
                         <p class="card-text">
                             <small class="text-muted">
-                                {{ $publication->created_at->day }}/{{ $publication->created_at->month }}/{{ $publication->created_at->year }}
+                                {{ $publication->created_at->format('d/m/Y') }}
                             </small>
                         </p>
                         <a href="/publications/show/{{ $publication->id }}" class="w-100 btn btn-dark">Mostrar</a>

@@ -3,7 +3,6 @@
 
 <h1>Comentaris</h1>
 
-    <a href="/comments/formnew">Crear Comentari</a>
     <table border=1>
         <thead>
         <tr>

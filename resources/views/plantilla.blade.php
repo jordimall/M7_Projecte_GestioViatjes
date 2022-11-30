@@ -101,15 +101,15 @@
     </nav>
 
 
-    <div class="container pt-5">
+    <main class="container pt-5">
         @yield('content')
-    </div>
+    </main>
 
 
-        <div class="bg-dark mt-5">
-            <p class="text-white p-3 text-center">BlogDeViatges - Tots els drets reservats {{ now()->year }} &copy;
-            </p>
-        </div>
+    <footer class="bg-dark mt-5">
+        <p class="text-white p-3 text-center">BlogDeViatges - Tots els drets reservats {{ now()->year }} &copy;
+        </p>
+    </footer>
 
 
 </body>

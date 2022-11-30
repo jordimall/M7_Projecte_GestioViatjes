@@ -54,6 +54,8 @@
                     {{ $comment->description }}
                 </p>
 
+                @auth
+
                 @if ($comment->user->id == Auth::user()->id)
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -84,6 +86,7 @@
                         <li class="nav-item">
                     </ul>
                 @endif
+                @endauth
             @endforeach
         </div>
     </div>

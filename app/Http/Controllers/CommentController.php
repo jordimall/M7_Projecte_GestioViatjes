@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
-use App\Models\Publication;
-use App\Models\User;
 
 class CommentController extends Controller
 {
@@ -47,5 +45,59 @@ class CommentController extends Controller
         $comment->save();
 
         return redirect('/publications/show/' . $id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Comment $comment)
+    {
+        //$planet = Planet::findOrFail($id);
+        
+        return view('comments.update',compact('comment'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Comment $comment)
+    {
+        $request->validate(
+
+            [
+                'description' => 'required | min:3'
+            ]
+
+        );
+        //$planet = Planet::findOrFail($id);
+        $comment->description =  $request->description;
+        $comment->publication_id = $comment->publication_id;
+        $comment->like = $comment->like;
+        $comment->user_id =  $comment->user_id;
+        $comment->save();
+  
+        return redirect('/publications/show/' . $comment->publication_id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Comment $comment)
+    {
+        //$planet = Planet::findOrFail($id);
+        $id = $comment->user_id;
+        $comment->delete();
+
+        return redirect('/publications/show/' . $id);  
     }
 }

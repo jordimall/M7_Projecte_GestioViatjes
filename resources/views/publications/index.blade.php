@@ -39,10 +39,13 @@
         @foreach ($publications as $publication)
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ $publication->url }}" class="card-img-top" alt="">
+                    <picture>
+                        <img src="{{ $publication->url }}" alt="" class="card-img-top img-fluid"
+                            style="height: 200px">
+                    </picture>
                     <div class="card-body">
                         <h5 class="card-title">{{ $publication->title }}</h5>
-                        <p class="card-text">{{ Str::limit($publication->description, 100) }}</p>
+                        <p class="card-text">{{ Str::limit($publication->description, 95) }}</p>
                         <p class="card-text">
                             <small class="text-muted">
                                 {{ $publication->created_at->day }}/{{ $publication->created_at->month }}/{{ $publication->created_at->year }}

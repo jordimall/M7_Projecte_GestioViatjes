@@ -1,15 +1,15 @@
 @extends('plantilla')
 @section('content')
     <div class="container" style="min-height: 100%">
-        <h2>Nou Comentari</h2>
+        <h2>Nova Categoria</h2>
 
-        <form action="/comments/save/{{ $id }}" method="POST">
+        <form action="{{ route('categories.save') }}" method="POST">
 
             @csrf
 
             <div class="form-group">
-                <label for="description">Escriu el comentari</label>
-                <input type="text" name="description" class="form-control">
+                <label for="name">Nova categoria</label>
+                <input type="text" name="name" class="form-control">
             </div>
 
 			<div class="form-group">

@@ -91,7 +91,7 @@
                                     </form>
                                 </div>
                             </div>
-                            
+
                         </li>
                     @endguest
                 </ul>
@@ -105,9 +105,12 @@
         @yield('content')
     </div>
 
-    <div class="bg-dark mt-5">
-        <p class="text-white p-3 text-center">BlogDeViatges - Tots els drets reservats {{ now()->year }} &copy;</p>
-    </div>
+
+        <div class="bg-dark mt-5">
+            <p class="text-white p-3 text-center">BlogDeViatges - Tots els drets reservats {{ now()->year }} &copy;
+            </p>
+        </div>
+
 
 </body>
 

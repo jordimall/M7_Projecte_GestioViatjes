@@ -25,13 +25,12 @@
                 <td>{{ $comment->publication_id }}</td>
                 <td>{{ $comment->created_at }}</td>
                 <td>{{ $comment->updated_at }}</td>
-                <td><a href="/comments/delete/{{ $comment->id }}">Esborrar</a></td>
-                <td><a href="/comments/update/{{ $comment->id }}">Actualitzar</a></td>
+                <td><a href="{{ route('comments.destroy', $comment->id) }}">Esborrar</a></td>
             </tr>
         @endforeach
         </tbody>
     </table>
 
-    {{-- {{ $publicaton->links('pagination::bootstrap-4') }} --}}
+
 
 @endsection

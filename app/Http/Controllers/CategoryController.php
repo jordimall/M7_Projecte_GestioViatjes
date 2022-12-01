@@ -10,11 +10,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('categories.index', compact('categories'));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -75,7 +75,7 @@ class CategoryController extends Controller
 
         $category->name = $request->name;
         $category->save();
-  
+
         return redirect('/categories');
     }
 
@@ -90,6 +90,6 @@ class CategoryController extends Controller
         //$planet = Planet::findOrFail($id);
         $category->delete();
 
-        return redirect('/categories');  
+        return redirect('/categories');
     }
 }

@@ -10,6 +10,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::all();
+
         return view('comments.index', compact('comments'));
     }
 
@@ -56,7 +57,7 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         //$planet = Planet::findOrFail($id);
-        
+
         return view('comments.update', compact('comment'));
     }
 
@@ -82,7 +83,7 @@ class CommentController extends Controller
         $comment->like = $comment->like;
         $comment->user_id =  $comment->user_id;
         $comment->save();
-  
+
         return redirect('/publications/show/' . $comment->publication_id);
     }
 
@@ -94,10 +95,13 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //$planet = Planet::findOrFail($id);
-        $id = $comment->user_id;
+
         $comment->delete();
 
-        return redirect('/publications/show/' . $id);  
+        if(auth()->user()->role == 'admin'){
+            return redirect('/comments');
+        };
+
+        return redirect('/publications/show/' . $comment->publication_id);
     }
 }

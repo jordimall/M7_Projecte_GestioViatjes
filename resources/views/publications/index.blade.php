@@ -2,9 +2,10 @@
 @section('content')
 
     <h1 class="pb-2">Publicacions</h1>
+    <a href="{{ route('publications.formnew')}}" class="w-100 btn btn-dark">Crea publicació</a>
 
     {{--<a href="/publications/formnew">Crear publicació</a>
-     <table border=1>
+    <table border=1>
         <thead>
             <tr>
                 <th>ID</th>

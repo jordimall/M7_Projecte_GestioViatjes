@@ -29,16 +29,16 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
     // Controladors Users
-    Route::post('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
+    Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
     // Route::get('/users/update/{user}',[UserController::class, 'edit'])->name('users.edit');
     // Route::post('/users/update/{user}',[UserController::class, 'update'])->name('users.update');
 
     // Controlador Publicactions
-    // Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');
-    // Route::post('/publications/save',[PublicationController::class, 'store'])->name('publications.save');
-    // Route::get('/publications/update/{publication}',[PublicationController::class, 'edit'])->name('publications.edit');
-    // Route::post('/publications/update/{publication}',[PublicationController::class, 'update'])->name('publications.update');
-    // Route::post('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
+    Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');
+    Route::post('/publications/save',[PublicationController::class, 'store'])->name('publications.save');
+    Route::get('/publications/update/{publication}',[PublicationController::class, 'edit'])->name('publications.edit');
+    Route::post('/publications/update/{publication}',[PublicationController::class, 'update'])->name('publications.update');
+    Route::get('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
 
     // Controlador Comments
     Route::get('/comments/formnew/{id}',[CommentController::class, 'create'])->name('comments.formnew');

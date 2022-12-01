@@ -37,6 +37,8 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                         </svg>
                         <strong>{{ $publication->user->name }}</strong>
+                        <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita publicaió</a>
+                        <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-dark">Eliminar publicaió</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +46,20 @@
         <div class="row pt-4">
             <div class="fs-4">
                 <strong class="pl-5">Comentaris</strong>
-                <a href="/comments/formnew/{{ $publication->id }}" class="btn btn-dark">Escriu comentari</a>
+                <form action="{{ route('comments.save', $publication->id) }}" method="POST">
+
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="description">Escriu el comentari</label>
+                        <input type="text" name="description" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                    <button type="submit" class=" btn btn-dark">comenta</button>
+                    </div>
+
+                </form>
             </div>
         </div>
         <div class="row pt-2">

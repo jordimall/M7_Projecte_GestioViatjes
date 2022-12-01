@@ -27,6 +27,8 @@
         </tbody>
     </table>
 
-    {{-- {{ $publicaton->links('pagination::bootstrap-4') }} --}}
+    <div>
+        {{ $categories->links('pagination::bootstrap-5') }}
+    </div>
 
 @endsection

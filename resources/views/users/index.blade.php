@@ -3,7 +3,7 @@
 
     <h1>Usuaris</h1>
 
-    <a href="/users/formnew">Crear Usuari</a>
+    <a href="/users/formnew" class="btn btn-primary">Crear Usuari</a>
     <table class="table table-striped table-hover">
         <tr>
             <td>ID</td>
@@ -14,7 +14,7 @@
             <td>Contrasenya</td>
             <td>Data de creació</td>
             <td>Data d'actualització</td>
-            <td>Operacions</td>
+            <td colspan="3">Operacions</td>
         </tr>
         @foreach ($users as $user)
             <tr>
@@ -26,9 +26,9 @@
                 <td>{{ $user->password }}</td>
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->updated_at }}</td>
-                <td><a href="/users/show/{{ $user->id }}">Mostrar</a></td>
-                <td><a href="/users/delete/{{ $user->id }}">Esborrar</a></td>
-                <td><a href="/users/update/{{ $user->id }}">Actualitzar</a></td>
+                <td><a href="/users/show/{{ $user->id }}" class="btn btn-dark">Mostrar</a></td>
+                <td><a href="/users/delete/{{ $user->id }}" class="btn btn-danger">Esborrar</a></td>
+                <td><a href="/users/update/{{ $user->id }}" class="btn btn-info">Actualitzar</a></td>
             </tr>
         @endforeach
     </table>

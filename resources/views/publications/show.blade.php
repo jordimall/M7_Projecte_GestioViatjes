@@ -37,8 +37,14 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                         </svg>
                         <strong>{{ $publication->user->name }}</strong>
-                        <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita publicaió</a>
-                        <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-dark">Eliminar publicaió</a>
+                        <br>
+                        <div>
+                            <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita
+                                publicaió</a>
+                            <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-danger">Eliminar
+                                publicaió</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -56,7 +62,7 @@
                     </div>
 
                     <div class="form-group">
-                    <button type="submit" class=" btn btn-dark">comenta</button>
+                        <button type="submit" class="btn btn-dark">comenta</button>
                     </div>
 
                 </form>
@@ -71,36 +77,36 @@
 
                 @auth
 
-                @if ($comment->user->id == Auth::user()->id)
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a id="navbarDropdown" class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{-- Es mostra el nom de l'usuari --}}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                    <path
-                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                </svg>
-                            </a>
+                    @if ($comment->user->id == Auth::user()->id)
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a id="navbarDropdown" class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{-- Es mostra el nom de l'usuari --}}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                    </svg>
+                                </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                <div>
-                                    <a class="dropdown-item" href="/comments/update/{{ $comment->id }}">
-                                        {{ __('Modificar') }}
-                                    </a>
+                                    <div>
+                                        <a class="dropdown-item" href="/comments/update/{{ $comment->id }}">
+                                            {{ __('Modificar') }}
+                                        </a>
 
-                                    <a class="dropdown-item" href="/comments/delete/{{ $comment->id }}">
-                                        {{ __('Eliminar') }}
-                                    </a>
+                                        <a class="dropdown-item" href="/comments/delete/{{ $comment->id }}">
+                                            {{ __('Eliminar') }}
+                                        </a>
+
+                                    </div>
 
                                 </div>
-
-                            </div>
-                        <li class="nav-item">
-                    </ul>
-                @endif
+                            <li class="nav-item">
+                        </ul>
+                    @endif
                 @endauth
             @endforeach
         </div>

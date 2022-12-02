@@ -30,6 +30,10 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
     // Controladors Users
     Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
+    Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
+    Route::post('/users/show/{user}',[UserController::class, 'show']);
+    Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
+
     // Route::get('/users/update/{user}',[UserController::class, 'edit'])->name('users.edit');
     // Route::post('/users/update/{user}',[UserController::class, 'update'])->name('users.update');
 

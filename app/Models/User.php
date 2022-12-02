@@ -17,6 +17,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class); // Relació 1 a N
     }
 
+    public function publication()
+    {
+        return $this->hasMany(Publication::class); // Relació 1 a N
+    }
+
     // Afegeixo un GETTER per a accedir a l'atribut virtual 'role_id'. Aquest getter 
     // es diu 'is_admin' o 'IsAdmmin'
     public function getIsAdminAttribute()

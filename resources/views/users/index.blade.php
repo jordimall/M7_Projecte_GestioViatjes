@@ -4,7 +4,7 @@
     <h1>Usuaris</h1>
 
     <a href="/users/formnew">Crear Usuari</a>
-    <table border=1>
+    <table class="table table-striped table-hover">
         <tr>
             <td>ID</td>
             <td>Nom</td>
@@ -14,6 +14,7 @@
             <td>Contrasenya</td>
             <td>Data de creació</td>
             <td>Data d'actualització</td>
+            <td>Operacions</td>
         </tr>
         @foreach ($users as $user)
             <tr>
@@ -32,6 +33,8 @@
         @endforeach
     </table>
 
-    {{-- {{ $users->links('pagination::bootstrap-4') }} --}}
+    <div>
+        {{ $users->links('pagination::bootstrap-5') }}
+    </div>
 
 @endsection

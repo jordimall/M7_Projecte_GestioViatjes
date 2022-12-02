@@ -33,22 +33,23 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
     Route::post('/users/show/{user}',[UserController::class, 'show']);
     Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
+
     // Route::get('/users/update/{user}',[UserController::class, 'edit'])->name('users.edit');
     // Route::post('/users/update/{user}',[UserController::class, 'update'])->name('users.update');
 
     // Controlador Publicactions
-    // Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');
-    // Route::post('/publications/save',[PublicationController::class, 'store'])->name('publications.save');
-    // Route::get('/publications/update/{publication}',[PublicationController::class, 'edit'])->name('publications.edit');
-    // Route::post('/publications/update/{publication}',[PublicationController::class, 'update'])->name('publications.update');
-    // Route::post('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
+    Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');
+    Route::post('/publications/save',[PublicationController::class, 'store'])->name('publications.save');
+    Route::get('/publications/update/{publication}',[PublicationController::class, 'edit'])->name('publications.edit');
+    Route::post('/publications/update/{publication}',[PublicationController::class, 'update'])->name('publications.update');
+    Route::get('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
 
     // Controlador Comments
     Route::get('/comments/formnew/{id}',[CommentController::class, 'create'])->name('comments.formnew');
     Route::post('/comments/save/{id}',[CommentController::class, 'store'])->name('comments.save');
-    // Route::get('/comments/update/{comment}',[CommentController::class, 'edit'])->name('comments.edit');
-    // Route::post('/comments/update/{comment}',[CommentController::class, 'update'])->name('comments.update');
-    // Route::post('/comments/delete/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::get('/comments/update/{comment}',[CommentController::class, 'edit'])->name('comments.edit');
+    Route::post('/comments/update/{comment}',[CommentController::class, 'update'])->name('comments.update');
+    Route::get('/comments/delete/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');
 
     Route::group(['middleware' => 'role:admin'], function () {
 
@@ -58,11 +59,11 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
         // Controlador Categories
         Route::get('/categories',[CategoryController::class, 'index']);
-        // Route::get('/categories/formnew',[CategoryController::class, 'create'])->name('categories.formnew');
-        // Route::post('/categories/save',[CategoryController::class, 'store'])->name('categories.save');
-        // Route::get('/categories/update/{comment}',[CategoryController::class, 'edit'])->name('categories.edit');
-        // Route::post('/categories/update/{comment}',[CategoryController::class, 'update'])->name('categories.update');
-        // Route::post('/categories/delete/{comment}',[CategoryController::class, 'destroy'])->name('categories.destroy');
+        Route::get('/categories/formnew',[CategoryController::class, 'create'])->name('categories.formnew');
+        Route::post('/categories/save',[CategoryController::class, 'store'])->name('categories.save');
+        Route::get('/categories/update/{category}',[CategoryController::class, 'edit'])->name('categories.edit');
+        Route::post('/categories/update/{category}',[CategoryController::class, 'update'])->name('categories.update');
+        Route::get('/categories/delete/{category}',[CategoryController::class, 'destroy'])->name('categories.destroy');
 
         // Controlador Comments
         Route::get('/comments',[CommentController::class, 'index']);

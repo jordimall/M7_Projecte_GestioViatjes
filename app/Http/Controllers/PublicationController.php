@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Publication;
 use App\Models\Category;
 
-use function PHPUnit\Framework\isNull;
-
 class PublicationController extends Controller
 {
 

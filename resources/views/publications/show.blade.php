@@ -43,7 +43,8 @@
         </div>
         <div class="row pt-4">
             <div class="fs-4">
-                <strong class="pl-5">Comentaris</strong>
+                <strong class="pl-5">Comentaris</strong><br>
+                <a href="/comments/formnew/{{ $publication->id }}" class="btn btn-dark">Escriu Comentari</a>
             </div>
         </div>
         <div class="row pt-2">

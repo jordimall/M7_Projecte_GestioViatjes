@@ -3,7 +3,7 @@
 
 <h1>Comentaris</h1>
 
-    <table border=1>
+    <table class="table table-striped table-hover">
         <thead>
         <tr>
             <td>ID</td>
@@ -13,6 +13,7 @@
             <td>id publicació</td>
             <td>Data de creació</td>
             <td>Data d'actualització</td>
+            <td>Operacions</td>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +26,7 @@
                 <td>{{ $comment->publication_id }}</td>
                 <td>{{ $comment->created_at }}</td>
                 <td>{{ $comment->updated_at }}</td>
-                <td><a href="{{ route('comments.destroy', $comment->id) }}">Esborrar</a></td>
+                <td><a href="{{ route('comments.destroy', $comment->id) }}" class="btn btn-info">Esborrar</a></td>
             </tr>
         @endforeach
         </tbody>

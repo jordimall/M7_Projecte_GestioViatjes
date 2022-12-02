@@ -37,14 +37,17 @@ class PublicationController extends Controller
             [
                 'title' => 'required | min:3',
                 'subtitle' => 'required | min:3',
-                'description' => 'required | min:3'
+                'description' => 'required | min:3',
+                'categories' => 'required',
+                'img' => 'required | mimes: jpeg,png,jpg,webp'
             ]
 
         );
 
         $file = $request->file('img');
         //obtenemos el nombre del archivo
-        $nombre =  'url_image/' . time() . "_" . $file->getClientOriginalName();
+        $nombre =  time() . "_" . $file->getClientOriginalName();
+        $url = 'url_image/' . time() . "_" . $file->getClientOriginalName();
         //indicamos que queremos guardar un nuevo archivo en el disco local
         \Storage::disk('url')->put($nombre,  \File::get($file));
 
@@ -52,7 +55,7 @@ class PublicationController extends Controller
         $publication->title =  $request->title;
         $publication->subtitle =  $request->subtitle;
         $publication->description =  $request->description;
-        $publication->url = $nombre;
+        $publication->url = $url;
         $publication->like =  0;
         $publication->user_id = auth()->user()->id;
         $publication->save();
@@ -93,17 +96,20 @@ class PublicationController extends Controller
             [
                 'title' => 'required | min:3',
                 'subtitle' => 'required | min:3',
-                'description' => 'required | min:3'
+                'description' => 'required | min:3',
+                'categories' => 'required',
+                'img' => 'mimes: jpeg,png,jpg,webp'
             ]
 
         );
 
         $file = $request->file('img');
-        if (isNull($file)) {
-            $nombre = $publication->url;
+        if (empty($file)) {
+            $url = $publication->url;
         } else {
             //obtenemos el nombre del archivo
-            $nombre =  'url_image/' . time() . "_" . $file->getClientOriginalName();
+            $nombre =  time() . "_" . $file->getClientOriginalName();
+            $url = 'url_image/' . time() . "_" . $file->getClientOriginalName();
             //indicamos que queremos guardar un nuevo archivo en el disco local
             \Storage::disk('url')->put($nombre,  \File::get($file));
         }
@@ -111,7 +117,7 @@ class PublicationController extends Controller
         $publication->title =  $request->title;
         $publication->subtitle =  $request->subtitle;
         $publication->description =  $request->description;
-        $publication->url =  $nombre;
+        $publication->url =  $url;
         $publication->user_id = $publication->user_id;
         $publication->save();
 
@@ -119,7 +125,7 @@ class PublicationController extends Controller
         $publication->categories()->attach($request->categories);
 
 
-        return view('publications.show', compact('publication'));
+        return redirect(route('publications.show', compact('publication')));
     }
 
     /**

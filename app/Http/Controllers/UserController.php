@@ -22,7 +22,6 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        // $user->load('comments');
         return view('users.show', compact('user'));
     }
 
@@ -42,6 +41,35 @@ class UserController extends Controller
     public function showPasswordConfirmation($id)
     {
         return view('users.passwordConfirmation', compact('id'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.update', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'name' => 'required | string | max:30',
+                'surname' => 'required | string | max:50',
+                'username' => 'required | string | min:3 | max:20'
+            ]
+        );
+
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->username = $request->username;
+        $user->save();
+        return view('users.show', compact('user'));
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect('/users');
     }
 
 }

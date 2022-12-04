@@ -31,7 +31,10 @@
                 <div class="d-flex">
                 @foreach ($categories as $category)
                     <div class="form-check form-check-inline">
-                        <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="form-check-input">{{ $category->name }}
+                        <label>
+                            <input type="checkbox" name="categories[]" value="{{ $category->id }}"
+                                class="form-check-input">{{ $category->name }}
+                        </label>
                     </div>
                 @endforeach
                 </div>

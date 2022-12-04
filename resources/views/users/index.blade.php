@@ -1,34 +1,36 @@
 @extends('plantilla')
+
 @section('content')
 
-    <h1>Usuaris</h1>
+    <h1 class="pb-2">Usuaris</h1>
 
-    <a href="/users/formnew" class="btn btn-primary">Crear Usuari</a>
+
     <table class="table table-striped table-hover">
-        <tr>
-            <td>ID</td>
-            <td>Nom</td>
-            <td>Cognoms</td>
-            <td>Email</td>
-            <td>Nom d'usuari</td>
-            <td>Contrasenya</td>
-            <td>Data de creació</td>
-            <td>Data d'actualització</td>
-            <td colspan="3">Operacions</td>
-        </tr>
+        <thead class="table-dark">
+            <tr>
+                <th style="border-radius:5px 0 0 0;" scope="col" class="text-center">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Cognoms</th>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col" class="text-center">Creació</th>
+                <th scope="col" class="text-center">Actualització</th>
+                <th scope="col" colspan="3" class="text-center" style="border-radius:0 5px 0 0;">Operacions</th>
+            </tr>
+        </thead>
+        <tbody>
         @foreach ($users as $user)
             <tr>
-                <td>{{ $user->id }}</td>
+                <th scope="row" class="text-center">{{ $user->id }}</th>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->surname }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->username }}</td>
-                <td>{{ $user->password }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->updated_at }}</td>
-                <td><a href="/users/show/{{ $user->id }}" class="btn btn-dark">Mostrar</a></td>
-                <td><a href="/users/delete/{{ $user->id }}" class="btn btn-danger">Esborrar</a></td>
-                <td><a href="/users/update/{{ $user->id }}" class="btn btn-info">Actualitzar</a></td>
+                <td class="text-center">{{ $user->created_at }}</td>
+                <td class="text-center">{{ $user->updated_at }}</td>
+                <td class="text-center"><a class="btn btn-info" href="/users/show/{{ $user->id }}">Mostrar</a></td>
+                <td class="text-center"><a class="btn btn-danger" href="{{ route('users.destroy', $user->id) }}">Esborrar</a></td>
+                <td class="text-center"><a class="btn btn-warning" href="{{ route('userEdit', ['user' => $user->id]) }}"">Actualitzar</a></td>
             </tr>
         @endforeach
     </table>

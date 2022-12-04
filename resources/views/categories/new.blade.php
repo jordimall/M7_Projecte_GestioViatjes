@@ -1,29 +1,31 @@
 @extends('plantilla')
+
 @section('content')
-    <div class="container" style="min-height: 100%">
-        <h2>Nova Categoria</h2>
 
-        <form action="{{ route('categories.save') }}" method="POST">
+    <h1 class="pb-2">Nova Categoria</h1>
 
-            @csrf
+    <form action="{{ route('categories.save') }}" method="POST">
 
-            <div class="form-group">
-                <label for="name">Nova categoria</label>
+        @csrf
+
+        <div class="fs-5 d-flex flex-column">
+            <div class="mb-3">
+                <label class="mb-2" for="name">Nova categoria</label>
                 <input type="text" name="name" class="form-control">
             </div>
+            <div class="mb-3">
+                <button type="submit" class=" btn btn-dark">Guardar</button>
+            </div>
+        </div>
 
-			<div class="form-group">
-            <button type="submit" class=" btn btn-dark">Save</button>
-			</div>
+    </form>
 
-        </form>
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-    </div>
 @endsection

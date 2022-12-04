@@ -134,9 +134,7 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        //$planet = Planet::findOrFail($id);
         $publication->delete();
-
         return redirect('/publications');
     }
 }

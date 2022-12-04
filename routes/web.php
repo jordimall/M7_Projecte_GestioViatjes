@@ -34,8 +34,9 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     Route::post('/users/show/{user}',[UserController::class, 'show']);
     Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
 
-    // Route::get('/users/update/{user}',[UserController::class, 'edit'])->name('users.edit');
-    // Route::post('/users/update/{user}',[UserController::class, 'update'])->name('users.update');
+    Route::get('/users/edit/{user}',[UserController::class, 'edit']);
+    Route::post('/users/edit/{user}',[UserController::class, 'edit'])->name('userEdit');
+    Route::post('/users/update/{user}',[UserController::class, 'update'])->name('userUpdate');
 
     // Controlador Publicactions
     Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');
@@ -55,7 +56,7 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
         // Controladors Users
         Route::get('/users',[UserController::class, 'index'])->name('users.index');
-        // Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');
 
         // Controlador Categories
         Route::get('/categories',[CategoryController::class, 'index']);

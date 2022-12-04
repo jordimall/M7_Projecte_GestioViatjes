@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <picture>
-                    <img src="../../{{ $publication->url }}" class="card-img-top img-fluid">
+                    <img src="../../{{ $publication->url }}" class="rounded img-fluid">
                 </picture>
             </div>
             <div class="col">
@@ -31,20 +31,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="pl-3 pt-1 d-flex justify-content-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#0d6efd"
-                            class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                        </svg>
-                        <strong>{{ $publication->user->name }}</strong>
-                        <br>
+                    <div class="pl-3 pt-1 d-flex justify-content-start d-flex flex-column">
                         <div>
-                            <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita
-                                publicaió</a>
-                            <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-danger">Eliminar
-                                publicaió</a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#0d6efd"
+                                class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg>
+                            <strong>{{ $publication->user->name }}</strong>
                         </div>
-
+                        <div class="mt-3">
+                            <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita publicaió</a>
+                            <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-danger">Eliminar publicaió</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,57 +56,61 @@
 
                     <div class="form-group">
                         <label for="description">Escriu el comentari</label>
-                        <input type="text" name="description" class="form-control">
+                        <textarea class="form-control" name="description" rows="3"></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-dark">comenta</button>
+                    <div class="form-group mt-3 mb-3">
+                        <button type="submit" class="btn btn-dark">Comenta</button>
                     </div>
 
                 </form>
             </div>
         </div>
-        <div class="row pt-2">
+        
             @foreach ($publication->comments as $comment)
-                <p class="h6 ms-auto">
-                    <span class="text-primary">&commat;{{ $comment->user->username }}</span>
-                    {{ $comment->description }}
-                </p>
+                <div class="row pt-2">
+                    <div class="col d-flex align-items-center ">
+                        <p class="h6 mb-0">
+                            <span class="text-primary">&commat;{{ $comment->user->username }}</span>
+                            {{ $comment->description }}
+                        </p>
+                    </div>
 
-                @auth
+                    @auth
 
-                    @if ($comment->user->id == Auth::user()->id)
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a id="navbarDropdown" class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{-- Es mostra el nom de l'usuari --}}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                        <path
-                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                    </svg>
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                    <div>
-                                        <a class="dropdown-item" href="/comments/update/{{ $comment->id }}">
-                                            {{ __('Modificar') }}
+                        @if ($comment->user->id == Auth::user()->id)
+                            <div class="col">
+                                <ul class="navbar-nav">
+                                    <li>
+                                        <a id="navbarDropdown" class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
                                         </a>
 
-                                        <a class="dropdown-item" href="/comments/delete/{{ $comment->id }}">
-                                            {{ __('Eliminar') }}
-                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                    </div>
+                                            <div>
+                                                <a class="dropdown-item" href="/comments/update/{{ $comment->id }}">
+                                                    {{ __('Modificar') }}
+                                                </a>
 
-                                </div>
-                            <li class="nav-item">
-                        </ul>
-                    @endif
-                @endauth
+                                                <a class="dropdown-item" href="/comments/delete/{{ $comment->id }}">
+                                                    {{ __('Eliminar') }}
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+                    @endauth
+                </div>
             @endforeach
-        </div>
+        
     </div>
 @endsection

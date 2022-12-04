@@ -1,7 +1,7 @@
 @extends('plantilla')
 
 @section('content')
-    <h1>Agencia de Viatges App</h1>
+    <h1>Blog de Viatges</h1>
 
     <div id="gallery" class="mt-5">
         <div class="container">

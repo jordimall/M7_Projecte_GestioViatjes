@@ -15,9 +15,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="p-1 navbar navbar-expand-lg navbar-dark bg-dark d-flex align-content-center">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">Home</a>
+            <a class="navbar-brand" href="{{ url('/') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -74,17 +74,26 @@
                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                     <a class="dropdown-item" href="/users/show/{{ Auth::user()->id }}"
                                         onclick="event.preventDefault();
                                         document.getElementById('perfil-form').submit();">
                                         {{ __('Perfil') }}
                                     </a>
-
                                     <form id="perfil-form" action="/users/show/{{ Auth::user()->id }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+
+                                    <a class="dropdown-item" href="{{ route('userEdit', ['user' => Auth::user()->id]) }}"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('edit-perfil-form').submit();">
+                                        {{ __('Editar Perfil') }}
+                                    </a>
+                                    <form id="edit-perfil-form" action="{{ route('userEdit', ['user' => Auth::user()->id]) }}" method="POST"
                                         class="d-none">
                                         @csrf
                                     </form>
@@ -94,7 +103,6 @@
                         </li>
                     @endguest
                 </ul>
-                {{-- </ul> --}}
             </div>
         </div>
     </nav>
@@ -106,7 +114,8 @@
 
 
     <footer class="bg-dark mt-5">
-        <p class="text-white p-3 text-center">BlogDeViatges - Tots els drets reservats {{ now()->year }} &copy;
+        <p class="text-white p-3 text-center">
+            Travel Time - Tots els drets reservats {{ now()->year }} &copy;
         </p>
     </footer>
 

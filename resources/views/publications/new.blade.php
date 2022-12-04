@@ -1,34 +1,34 @@
 @extends('plantilla')
 @section('content')
-    <div class="container">
-        <h2>Nova publicació</h2>
 
-        <form action="{{ route('publications.save') }}" method="POST" enctype="multipart/form-data">
+<div class="vh-100">
 
-            @csrf
+    <h1 class="text-center">Nova publicació</h1>
 
-            <div class="form-group">
+    <form action="{{ route('publications.save') }}" method="POST" enctype="multipart/form-data">
+
+        @csrf
+
+        <div class="fs-5 d-flex flex-column">
+            <div class="row mb-3">
                 <label for="title">Escriu un titul</label>
                 <input type="text" name="title" class="form-control">
             </div>
-
-            <div class="form-group">
+            <div class="row mb-3">
                 <label for="subtitle">Escriu un subtitul</label>
                 <input type="text" name="subtitle" class="form-control">
             </div>
-
-            <div class="form-group">
+            <div class="row mb-3">
                 <label for="description">Escriu una descripció</label>
-                <input type="text" name="description" class="form-control">
+                <textarea class="form-control" name="description" rows="3"></textarea>
             </div>
-
-            <div class="form-group">
+            <div class="row mb-3">
                 <label for="img">Selecciona una imatge</label>
                 <input type="file" name="img" class="form-control" accept=".png, .jpg, .jpeg, .webp">
             </div>
-
-            <div class="form-group">
+            <div class="row mb-3">
                 <label for="categories[]">Selecciona les categories:</label><br>
+                <div class="d-flex">
                 @foreach ($categories as $category)
                     <div class="form-check form-check-inline">
                         <label>
@@ -37,19 +37,21 @@
                         </label>
                     </div>
                 @endforeach
+                </div>
             </div>
-
-            <div class="form-group">
-                <button type="submit" class=" btn btn-dark">Save</button>
+            <div class="row mb-3 m-auto">
+                <button type="submit" class="btn btn-dark">Guardar</button>
             </div>
-        </form>
+            
+    </form>
 
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-    </div>
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+</div>
+
 @endsection

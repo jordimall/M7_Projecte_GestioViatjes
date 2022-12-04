@@ -1,31 +1,24 @@
 @extends('plantilla')
+
 @section('content')
-    <div class="card mt-4">
-        <div class="card-header">
-            <h5 class="card-title">Actualitzar categoria</h5>
+
+    <h1 class="pb-2">Actualitzar categoria</h1>
+
+    <form action="/categories/update/{{ old('id', $category->id) }}" method="POST">
+
+        @csrf
+
+        <div class="fs-5 d-flex flex-column">
+            <div class="mb-3">
+                <label for="name">Modifica la categoria</label>
+                <input type="text" name="name" class="form-control" value="{{ old('name', $category->name) }}">
+            </div>
+            <div class="mb-3">
+                <button type="submit" class=" btn btn-dark">Guardar</button>
+            </div>
         </div>
-        <div class="card-body">
 
-
-            <form action="/categories/update/{{ old('id', $category->id) }}" method="POST">
-
-                @csrf
-
-                <div class="form-group">
-                    <label for="name">Modifica la categoria</label>
-                    <input type="text" name="name" class="form-control"
-                        value="{{ old('name', $category->name) }}">
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class=" btn btn-dark">Save</button>
-                </div>
-
-
-
-            </form>
-        </div>
-    </div>
+    </form>
 
     @if ($errors->any())
         <ul>

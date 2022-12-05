@@ -41,7 +41,6 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->description =  $request->description;
         $comment->publication_id = $id;
-        $comment->like = 0;
         $comment->user_id =  auth()->user()->id;
         $comment->save();
 
@@ -80,7 +79,6 @@ class CommentController extends Controller
         //$planet = Planet::findOrFail($id);
         $comment->description =  $request->description;
         $comment->publication_id = $comment->publication_id;
-        $comment->like = $comment->like;
         $comment->user_id =  $comment->user_id;
         $comment->save();
 

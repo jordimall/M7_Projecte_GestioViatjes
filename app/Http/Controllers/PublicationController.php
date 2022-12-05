@@ -54,7 +54,6 @@ class PublicationController extends Controller
         $publication->subtitle =  $request->subtitle;
         $publication->description =  $request->description;
         $publication->url = $url;
-        $publication->like =  0;
         $publication->user_id = auth()->user()->id;
         $publication->save();
         $publication->categories()->attach($request->categories);

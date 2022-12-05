@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -61,7 +62,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->surname = $request->surname;
-        $user->username = $request->username;
+        $user->username = Str::lower($request->username);
         $user->save();
         return view('users.show', compact('user'));
     }

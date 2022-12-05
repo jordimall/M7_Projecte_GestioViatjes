@@ -4,7 +4,7 @@
     <h1 class="pb-2">Publicacions</h1>
 
     <a href="{{ route('publications.formnew')}}" class="btn btn-primary btn-dark">Crea publicació</a>
-    
+
     <div class="row row-cols-1 row-cols-md-4 g-4 pt-4">
         @foreach ($publications as $publication)
             <div class="col">

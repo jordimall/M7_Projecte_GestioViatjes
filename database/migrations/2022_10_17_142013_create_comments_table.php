@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->integer('like');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('publication_id')->constrained();
             $table->timestamps();

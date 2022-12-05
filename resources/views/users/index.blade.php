@@ -4,6 +4,7 @@
 
     <h1 class="pb-2">Usuaris</h1>
 
+
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>

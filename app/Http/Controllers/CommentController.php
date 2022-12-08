@@ -94,7 +94,9 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
 
-        $comment->delete();
+        if(auth()->user()->role == 'admin' || $comment->user_id){
+            $comment->delete();
+        };
 
         if(auth()->user()->role == 'admin'){
             return redirect('/comments');

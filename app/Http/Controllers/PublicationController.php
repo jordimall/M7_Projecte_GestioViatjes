@@ -133,7 +133,10 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        $publication->delete();
+        if(auth()->user()->id == $publication->user_id || auth()->user()->role == 'admin'){
+            $publication->delete();
+        }
+
         return redirect('/publications');
     }
 }

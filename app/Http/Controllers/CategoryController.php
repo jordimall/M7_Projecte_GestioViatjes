@@ -87,9 +87,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //$planet = Planet::findOrFail($id);
-        $category->delete();
-
+        if(auth()->user()->role == 'admin'){
+            $category->delete();
+        }
         return redirect('/categories');
     }
 }

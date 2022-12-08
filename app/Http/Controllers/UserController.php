@@ -69,7 +69,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $user->delete();
+        if(auth()->user()->role == 'admin' || auth()->user()->id == $user->id){
+            $user->delete();
+        };
+
         return redirect('/users');
     }
 

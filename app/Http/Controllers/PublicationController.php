@@ -75,8 +75,12 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
-        $categories  = Category::all();
-        return view('publications.update', compact('publication'), compact('categories'));
+        if(auth()->user()->id == $publication->user_id){
+            $categories  = Category::all();
+            return view('publications.update', compact('publication'), compact('categories'));
+        }
+        return redirect(route('publications.show', compact('publication')));
+
     }
 
     /**
@@ -133,7 +137,10 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        $publication->delete();
+        if(auth()->user()->id == $publication->user_id || auth()->user()->role == 'admin'){
+            $publication->delete();
+        }
+
         return redirect('/publications');
     }
 }

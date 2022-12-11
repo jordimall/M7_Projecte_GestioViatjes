@@ -40,12 +40,18 @@
                             <strong>{{ $publication->user->name }}</strong>
                         </div>
                         @auth
-                            @if ($publication->user->id == Auth::user()->id)
-                                <div class="mt-3">
-                                    <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita publicaió</a>
-                                    <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-danger">Eliminar publicaió</a>
-                                </div>
-                            @endif
+
+                            <div class="mt-3">
+                                @if (Auth::user()->id == $publication->user_id)
+                                    <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita
+                                        publicaió</a>
+                                @endif
+                                @if (Auth::user()->id == $publication->user_id || Auth::user()->role == 'admin')
+                                    <a href="{{ route('publications.destroy', $publication->id) }}"
+                                        class="btn btn-danger">Eliminar publicaió</a>
+                                @endif
+                            </div>
+
                         @endauth
                     </div>
                 </div>
@@ -70,51 +76,54 @@
                 </form>
             </div>
         </div>
-        
-            @foreach ($publication->comments as $comment)
-                <div class="row pt-2">
-                    <div class="col d-flex align-items-center ">
-                        <p class="h6 mb-0">
-                            <span class="text-primary">&commat;{{ $comment->user->username }}</span>
-                            {{ $comment->description }}
-                        </p>
-                    </div>
 
-                    @auth
+        @foreach ($publication->comments as $comment)
+            <div class="row pt-2">
+                <div class="col d-flex align-items-center ">
+                    <p class="h6 mb-0">
+                        <span class="text-primary">&commat;{{ $comment->user->username }}</span>
+                        {{ $comment->description }}
+                    </p>
+                </div>
 
-                        @if ($comment->user->id == Auth::user()->id)
-                            <div class="col">
-                                <ul class="navbar-nav">
-                                    <li>
-                                        <a id="navbarDropdown" class="nav-link " href="#" role="button" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false" v-pre>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                            </svg>
-                                        </a>
+                @auth
 
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @if ($comment->user->id == Auth::user()->id)
+                        <div class="col">
+                            <ul class="navbar-nav">
+                                <li>
+                                    <a id="navbarDropdown" class="nav-link " href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>
+                                    </a>
 
-                                            <div>
-                                                <a class="dropdown-item" href="/comments/update/{{ $comment->id }}">
-                                                    {{ __('Modificar') }}
-                                                </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                                <a class="dropdown-item" href="/comments/delete/{{ $comment->id }}">
-                                                    {{ __('Eliminar') }}
-                                                </a>
+                                        <div>
+                                            <a class="dropdown-item" href="/comments/update/{{ $comment->id }}">
+                                                {{ __('Modificar') }}
+                                            </a>
 
-                                            </div>
+                                            <a class="dropdown-item" href="/comments/delete/{{ $comment->id }}">
+                                                {{ __('Eliminar') }}
+                                            </a>
 
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
-                    @endauth
-                </div>
-            @endforeach
-        
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+                @endauth
+            </div>
+        @endforeach
+
     </div>
 @endsection

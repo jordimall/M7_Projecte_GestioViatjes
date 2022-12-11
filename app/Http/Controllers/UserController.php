@@ -46,7 +46,10 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.update', compact('user'));
+        if(auth()->user()->id == $user->id){
+            return view('users.update', compact('user'));
+        }
+        return view('welcom');
     }
 
     public function update(Request $request, $id)
@@ -69,7 +72,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $user->delete();
+        if(auth()->user()->role == 'admin' || auth()->user()->id == $user->id){
+            $user->delete();
+        };
+
         return redirect('/users');
     }
 

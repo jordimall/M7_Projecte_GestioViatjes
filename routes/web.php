@@ -29,12 +29,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
     // Controladors Users
-    Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
-    Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
     Route::post('/users/show/{user}',[UserController::class, 'show']);
+    Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
     Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
-
-    Route::get('/users/edit/{user}',[UserController::class, 'edit']);
     Route::post('/users/edit/{user}',[UserController::class, 'edit'])->name('userEdit');
     Route::post('/users/update/{user}',[UserController::class, 'update'])->name('userUpdate');
 
@@ -43,10 +40,8 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     Route::post('/publications/save',[PublicationController::class, 'store'])->name('publications.save');
     Route::get('/publications/update/{publication}',[PublicationController::class, 'edit'])->name('publications.edit');
     Route::post('/publications/update/{publication}',[PublicationController::class, 'update'])->name('publications.update');
-    Route::get('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
 
     // Controlador Comments
-    Route::get('/comments/formnew/{id}',[CommentController::class, 'create'])->name('comments.formnew');
     Route::post('/comments/save/{id}',[CommentController::class, 'store'])->name('comments.save');
     Route::get('/comments/update/{comment}',[CommentController::class, 'edit'])->name('comments.edit');
     Route::post('/comments/update/{comment}',[CommentController::class, 'update'])->name('comments.update');
@@ -56,7 +51,15 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
         // Controladors Users
         Route::get('/users',[UserController::class, 'index'])->name('users.index');
+        Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
+        Route::get('/users/edit/{user}',[UserController::class, 'edit']);
         Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');
+
+        // Controlador Publicactions
+        Route::get('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
+
+        // Controlador Comments
+        Route::get('/comments',[CommentController::class, 'index']);
 
         // Controlador Categories
         Route::get('/categories',[CategoryController::class, 'index']);
@@ -65,9 +68,6 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
         Route::get('/categories/update/{category}',[CategoryController::class, 'edit'])->name('categories.edit');
         Route::post('/categories/update/{category}',[CategoryController::class, 'update'])->name('categories.update');
         Route::get('/categories/delete/{category}',[CategoryController::class, 'destroy'])->name('categories.destroy');
-
-        // Controlador Comments
-        Route::get('/comments',[CommentController::class, 'index']);
 
     });
 });

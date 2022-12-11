@@ -39,10 +39,14 @@
                             </svg>
                             <strong>{{ $publication->user->name }}</strong>
                         </div>
-                        <div class="mt-3">
-                            <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita publicaió</a>
-                            <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-danger">Eliminar publicaió</a>
-                        </div>
+                        @auth
+                            @if ($publication->user->id == Auth::user()->id)
+                                <div class="mt-3">
+                                    <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita publicaió</a>
+                                    <a href="{{ route('publications.destroy', $publication->id) }}" class="btn btn-danger">Eliminar publicaió</a>
+                                </div>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>

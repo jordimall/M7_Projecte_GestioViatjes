@@ -14,15 +14,15 @@ class CommentController extends Controller
         return view('comments.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    {
-        return view('comments.new', compact('id'));
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create($id)
+    // {
+    //     return view('comments.new', compact('id'));
+    // }
 
     /**
      * Store a newly created resource in storage.

@@ -40,6 +40,7 @@
                             <strong>{{ $publication->user->name }}</strong>
                         </div>
                         @auth
+
                             <div class="mt-3">
                                 @if (Auth::user()->id == $publication->user_id)
                                     <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita
@@ -50,6 +51,7 @@
                                         class="btn btn-danger">Eliminar publicaió</a>
                                 @endif
                             </div>
+
                         @endauth
                     </div>
                 </div>

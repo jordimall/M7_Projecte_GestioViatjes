@@ -55,9 +55,10 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //$planet = Planet::findOrFail($id);
-
-        return view('comments.update', compact('comment'));
+        if(auth()->user()->id == $comment->user_id){
+            return view('comments.update', compact('comment'));
+        }
+        return redirect('/publications/show/' . $comment->publication_id);
     }
 
     /**
@@ -94,7 +95,7 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
 
-        if(auth()->user()->role == 'admin' || $comment->user_id){
+        if(auth()->user()->role == 'admin' || auth()->user()->id == $comment->user_id){
             $comment->delete();
         };
 

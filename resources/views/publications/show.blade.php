@@ -41,11 +41,11 @@
                         </div>
                         @auth
                             <div class="mt-3">
-                                @if (Auth::user->id == $publication->user_id)
+                                @if (Auth::user()->id == $publication->user_id)
                                     <a href="{{ route('publications.edit', $publication->id) }}" class="btn btn-dark">Edita
                                         publicaió</a>
                                 @endif
-                                @if (Auth::user->id == $publication->user_id || Auth::user->role == 'admin')
+                                @if (Auth::user()->id == $publication->user_id || Auth::user()->role == 'admin')
                                     <a href="{{ route('publications.destroy', $publication->id) }}"
                                         class="btn btn-danger">Eliminar publicaió</a>
                                 @endif

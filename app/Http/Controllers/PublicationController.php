@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Publication;
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PublicationController extends Controller
 {
@@ -45,9 +47,9 @@ class PublicationController extends Controller
         $file = $request->file('img');
         //obtenemos el nombre del archivo
         $nombre =  time() . "_" . $file->getClientOriginalName();
-        $url = 'url_image/' . time() . "_" . $file->getClientOriginalName();
+        $url = 'url_image/' . $nombre;
         //indicamos que queremos guardar un nuevo archivo en el disco local
-        \Storage::disk('url')->put($nombre,  \File::get($file));
+        Storage::disk('url')->put($nombre,  File::get($file));
 
         $publication = new Publication;
         $publication->title =  $request->title;
@@ -110,9 +112,9 @@ class PublicationController extends Controller
         } else {
             //obtenemos el nombre del archivo
             $nombre =  time() . "_" . $file->getClientOriginalName();
-            $url = 'url_image/' . time() . "_" . $file->getClientOriginalName();
+            $url = 'url_image/' . $nombre;
             //indicamos que queremos guardar un nuevo archivo en el disco local
-            \Storage::disk('url')->put($nombre,  \File::get($file));
+            Storage::disk('url')->put($nombre,  File::get($file));
         }
 
         $publication->title =  $request->title;
@@ -138,7 +140,9 @@ class PublicationController extends Controller
     public function destroy(Publication $publication)
     {
         if(auth()->user()->id == $publication->user_id || auth()->user()->role == 'admin'){
+            File::delete($publication->url);
             $publication->delete();
+
         }
 
         return redirect('/publications');

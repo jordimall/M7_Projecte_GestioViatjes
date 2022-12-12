@@ -49,7 +49,7 @@ class PublicationController extends Controller
         $nombre =  time() . "_" . $file->getClientOriginalName();
         $url = 'url_image/' . $nombre;
         //indicamos que queremos guardar un nuevo archivo en el disco local
-        \Storage::disk('url')->put($nombre,  \File::get($file));
+        Storage::disk('url')->put($nombre,  File::get($file));
 
         $publication = new Publication;
         $publication->title =  $request->title;
@@ -114,7 +114,7 @@ class PublicationController extends Controller
             $nombre =  time() . "_" . $file->getClientOriginalName();
             $url = 'url_image/' . $nombre;
             //indicamos que queremos guardar un nuevo archivo en el disco local
-            \Storage::disk('url')->put($nombre,  \File::get($file));
+            Storage::disk('url')->put($nombre,  File::get($file));
         }
 
         $publication->title =  $request->title;

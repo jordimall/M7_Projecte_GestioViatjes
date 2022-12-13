@@ -42,7 +42,7 @@
             <div class="row mb-3 m-auto">
                 <button type="submit" class="btn btn-dark">Guardar</button>
             </div>
-            
+
     </form>
 
     @if ($errors->any())

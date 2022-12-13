@@ -20,10 +20,10 @@ use App\Http\Controllers\CategoryController;
 // Controlador Publicactions
 Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');
 Route::get('/publications/show/{publication}',[PublicationController::class, 'show'])->name('publications.show');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Per a utilitzar els MIDDLEWARES
 Route::group(['middleware' => 'auth'], function () { // usuari autentificat
@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     Route::post('/publications/save',[PublicationController::class, 'store'])->name('publications.save');
     Route::get('/publications/update/{publication}',[PublicationController::class, 'edit'])->name('publications.edit');
     Route::post('/publications/update/{publication}',[PublicationController::class, 'update'])->name('publications.update');
+    Route::get('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
 
     // Controlador Comments
     Route::post('/comments/save/{id}',[CommentController::class, 'store'])->name('comments.save');
@@ -54,9 +55,6 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
         Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
         Route::get('/users/edit/{user}',[UserController::class, 'edit']);
         Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');
-
-        // Controlador Publicactions
-        Route::get('/publications/delete/{publication}',[PublicationController::class, 'destroy'])->name('publications.destroy');
 
         // Controlador Comments
         Route::get('/comments',[CommentController::class, 'index']);

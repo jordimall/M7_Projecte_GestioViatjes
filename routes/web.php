@@ -17,13 +17,17 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+// Controlador Api
+Route::get('/taulaplanetes', function () {
+    return view('planets.api.index');
+});
+
 // Controlador Publicactions
 Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');
 Route::get('/publications/show/{publication}',[PublicationController::class, 'show'])->name('publications.show');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-
 
 // Per a utilitzar els MIDDLEWARES
 Route::group(['middleware' => 'auth'], function () { // usuari autentificat

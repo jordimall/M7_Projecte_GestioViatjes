@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
 
 
-class CategoryController extends Controller
+class apicategoryController extends Controller
 {
     public function index()
     {
         $categories = Category::all(['id','name','created_at','updated_at']);
         $response = [
             'success' => true,
-            'message' => 'Llistat planetes recuperat',
+            'message' => 'Llistat de categories recuperat',
             'data' => $categories
         ];
         // return $response;

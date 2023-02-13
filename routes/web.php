@@ -18,8 +18,8 @@ use App\Http\Controllers\CategoryController;
 */
 
 // Controlador Api
-Route::get('/taulaplanetes', function () {
-    return view('planets.api.index');
+Route::get('/taulacategories', function () {
+    return view('categories.api.index');
 });
 
 // Controlador Publicactions

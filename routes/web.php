@@ -21,6 +21,9 @@ use App\Http\Controllers\CategoryController;
 Route::get('/taulacomments', function () {
     return view('comments.api.index');
 });
+Route::get('/home', function (){
+    return view('api.welcome');
+});
 
 // Controlador Publicactions
 Route::get('/publications',[PublicationController::class, 'index'])->name('publications.index');

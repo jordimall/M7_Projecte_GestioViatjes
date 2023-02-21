@@ -28,13 +28,13 @@
                     @auth
                         @if (Auth::user()->role == 'admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/users') }}">Usuaris</a>
+                                <a class="nav-link" href="{{ url('/taulausers') }}">Usuaris</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/comments') }}">Comentaris</a>
+                                <a class="nav-link" href="{{ url('/taulacomments') }}">Comentaris</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
+                                <a class="nav-link" href="{{ url('/taulacategories') }}">Categories</a>
                             </li>
                         @endif
                     @endauth

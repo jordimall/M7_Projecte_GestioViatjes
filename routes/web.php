@@ -17,6 +17,10 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+Route::get('/taulacetegories', function (){
+    return view('categories.api.index');
+});
+
 Route::get('/home', function (){
     return view('api.welcome');
 });

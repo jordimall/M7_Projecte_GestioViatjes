@@ -1,4 +1,4 @@
-@extends('api/plantilla')
+@extends('plantilla')
 
 @section('content')
     <h1>Blog de Viatges</h1>

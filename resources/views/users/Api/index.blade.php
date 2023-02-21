@@ -30,7 +30,6 @@
     </table>
 
     <nav class="mt-2">
-
         <ul id="pagination" class="pagination">
 
         </ul>

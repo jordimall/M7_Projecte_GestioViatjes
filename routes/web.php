@@ -17,9 +17,8 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// Controlador Api
-Route::get('/taulacategories', function () {
-    return view('categories.api.index');
+Route::get('/home', function (){
+    return view('api.welcome');
 });
 
 // Controlador Publicactions

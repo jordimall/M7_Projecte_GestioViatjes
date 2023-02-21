@@ -9,11 +9,11 @@ use App\Models\Category;
 use Validator;
 
 
-class apicategoryController extends Controller
+class categoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all(['id','name','created_at','updated_at']);
+        $categories = Category::paginate(10);
         $response = [
             'success' => true,
             'message' => 'Llistat de categories recuperat',
@@ -31,7 +31,6 @@ class apicategoryController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -50,13 +49,13 @@ class apicategoryController extends Controller
             ]
         );
 
-        if($validadtor->fails()){
+        if ($validadtor->fails()) {
             $response = [
                 'success' => false,
                 'message' => 'Errors de validació',
                 'data' => $validadtor->errors()->all()
             ];
-            return response()->json($response,400);
+            return response()->json($response, 400);
         }
 
         $categoria = Category::create($input);
@@ -67,11 +66,10 @@ class apicategoryController extends Controller
             'data' => $categoria
         ];
 
-        return response()->json($response,200);
-
+        return response()->json($response, 200);
     }
 
-     /**
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -107,7 +105,6 @@ class apicategoryController extends Controller
      */
     public function edit(Category $category)
     {
-
     }
 
     /**
@@ -120,61 +117,9 @@ class apicategoryController extends Controller
     public function update(Request $request, $id)
     {
 
-            // Buscar planeta
-            $categoria = Category::find($id);
-
-            if ($categoria == null) {
-                $response = [
-                    'success' => false,
-                    'message' => 'Categoria no trobada',
-                    'data' => [],
-                ];
-
-                return response()->json($response, 404);
-            }
-
-            // Validar camps
-            $input = $request->all();
-            $validator = Validator::make($input,
-                [
-                    'name' => 'required|min:3',
-                ]
-            );
-
-            if ($validator->fails()) {
-                $response = [
-                    'success' => false,
-                    'message' => "Error de validació",
-                    'data' => $validator->errors(),
-                ];
-                return response()->json($response, 400);
-            }
-
-            // Versió 1 però perillosa :/
-            $categoria->update($input);
-
-            // Versió 2 no perillosa 🙂
-            // $categoria->name = $input->name;
-            // $categoria->save();
-
-            $response = [
-                'success' => true,
-                'message' => "CAtegoria actualitzada correctament",
-                'data' => $categoria,
-            ];
-            return response()->json($response, 200);
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+        // Buscar planeta
         $categoria = Category::find($id);
+
         if ($categoria == null) {
             $response = [
                 'success' => false,
@@ -185,23 +130,77 @@ class apicategoryController extends Controller
             return response()->json($response, 404);
         }
 
-        try {
-            $categoria->delete();
+        // Validar camps
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'name' => 'required|min:3',
+            ]
+        );
 
-            $response = [
-                'success' => true,
-                'message' => 'Categoria esborrada',
-                'data' => $categoria,
-            ];
-
-            return response()->json($response, 200);
-        } catch (\Exception $e) {
+        if ($validator->fails()) {
             $response = [
                 'success' => false,
-                'message' => 'Error esborrant categoria',
+                'message' => "Error de validació",
+                'data' => $validator->errors(),
             ];
-
             return response()->json($response, 400);
+        }
+
+        // Versió 1 però perillosa :/
+        $categoria->update($input);
+
+        // Versió 2 no perillosa 🙂
+        // $categoria->name = $input->name;
+        // $categoria->save();
+
+        $response = [
+            'success' => true,
+            'message' => "CAtegoria actualitzada correctament",
+            'data' => $categoria,
+        ];
+        return response()->json($response, 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if (auth()->user()->role == 'admin') {
+            $categoria = Category::find($id);
+            if ($categoria == null) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Categoria no trobada',
+                    'data' => [],
+                ];
+
+                return response()->json($response, 404);
+            }
+
+            try {
+                $categoria->delete();
+
+                $response = [
+                    'success' => true,
+                    'message' => 'Categoria esborrada',
+                    'data' => $categoria,
+                ];
+
+                return response()->json($response, 200);
+            } catch (\Exception $e) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Error esborrant categoria',
+                ];
+
+                return response()->json($response, 400);
+            }
         }
     }
 }

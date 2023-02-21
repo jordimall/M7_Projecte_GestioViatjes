@@ -17,10 +17,15 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+=
 
 // Controlador Api
 Route::get('/taulacomments', function () {
     return view('comments.api.index');
+});
+
+Route::get('/taulacetegories', function (){
+    return view('categories.api.index');
 });
 
 Route::get('/home', function (){

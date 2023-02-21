@@ -54,7 +54,7 @@
         const resetButton = document.getElementById('resetButton');
         resetButton.addEventListener('click', modificarBoto);
 
-        const url = 'http://localhost:8000/api/category';
+        const url = 'http://localhost:8000/api/categories';
 
         async function loadIntoTable(url) {
             try {

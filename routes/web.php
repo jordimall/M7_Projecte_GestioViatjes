@@ -18,8 +18,8 @@ use App\Http\Controllers\CategoryController;
 */
 
 // Controlador Api
-Route::get('/taulaplanetes', function () {
-    return view('planets.api.index');
+Route::get('/taulacomments', function () {
+    return view('comments.api.index');
 });
 
 // Controlador Publicactions
@@ -56,15 +56,24 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
         // Controladors Users
         Route::get('/users',[UserController::class, 'index'])->name('users.index');
+        Route::get('/taulausers', function () {
+            return view('users.api.index');
+        });
         Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
         Route::get('/users/edit/{user}',[UserController::class, 'edit']);
         Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');
 
         // Controlador Comments
-        Route::get('/comments',[CommentController::class, 'index']);
+        //Route::get('/comments',[CommentController::class, 'index']);
+        Route::get('/taulacomments', function () {
+            return view('comments.api.index');
+        });
 
         // Controlador Categories
-        Route::get('/categories',[CategoryController::class, 'index']);
+        // Route::get('/categories',[CategoryController::class, 'index']);
+        Route::get('/taulacategories', function () {
+            return view('categories.api.index');
+        });
         Route::get('/categories/formnew',[CategoryController::class, 'create'])->name('categories.formnew');
         Route::post('/categories/save',[CategoryController::class, 'store'])->name('categories.save');
         Route::get('/categories/update/{category}',[CategoryController::class, 'edit'])->name('categories.edit');

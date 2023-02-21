@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Route;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Internament ja estàn definides les rutes per als GET, POST, PUT i DELETE.
 Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
-
+Route::resource('/comments', App\Http\Controllers\api\CommentController::class);

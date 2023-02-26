@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
 Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
 Route::resource('/home', App\Http\Controllers\api\homeController::class);
+Route::resource('/publications', App\Http\Controllers\api\publicationController::class);

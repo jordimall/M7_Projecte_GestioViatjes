@@ -19,10 +19,10 @@
 
                                 <p class="pb-2">{{ Str::limit($publication->description, 95) }}</p>
                                 <p class="card-text">
-                                  <small class="text-muted">
-                                    {{ $publication->created_at->format('d/m/Y') }}
-                                  </small>
-                              </p>
+                                    <small class="text-muted">
+                                        {{ $publication->created_at->format('d/m/Y') }}
+                                    </small>
+                                </p>
                                 <a href="/publications/show/{{ $publication->id }}" class="w-100 btn btn-dark">Mostrar</a>
                             </div>
                         </div>

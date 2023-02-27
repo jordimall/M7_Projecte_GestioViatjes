@@ -106,6 +106,7 @@ class publicationController extends Controller
         $publication->load('categories');
         $publication->load('user');
         $publication->load('comments');
+        $publication->load('comments')->load('user');
 
         if ($publication == null) {
             $response = [

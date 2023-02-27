@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +23,31 @@ Route::get('/taulacomments', function () {
     return view('comments.api.index');
 });
 
-Route::get('/taulacetegories', function (){
+Route::get('/taulacategories', function (){
     return view('categories.api.index');
+});
+
+Route::get('/taulapublicacions', function (){
+    return view('publications.api.index');
+});
+
+Route::get('/taulapublicacions/{id}', function (){
+    return view('publications.api.show');
 });
 
 Route::get('/home', function (){
     return view('welcome');
+});
+
+Route::get('/token',function(Request $request){
+
+    if(auth()->check()){
+        auth()->user()->tokens()->delete(); //esborra tots els tokens del usuari de la base de dades.
+        $token = auth()->user()->createToken('prova');
+        return response()->json(['token'=> $token->plainTextToken],200);
+    }else{
+        return response()->json('Not authorized',405);
+    }
 });
 
 // Controlador Publicactions

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gestió de Viatges - Grup 5</title>
     {{-- Aplico estils Bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -17,7 +16,7 @@
 <body>
     <nav class="p-1 navbar navbar-expand-lg navbar-dark bg-dark d-flex align-content-center">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
+            <a class="navbar-brand" href="{{ url('/home') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,7 +39,7 @@
                     @endauth
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/publications') }}">Publicacions</a>
+                        <a class="nav-link" href="{{ url('/taulapublicacions') }}">Publicacions</a>
                     </li>
 
                 </ul>

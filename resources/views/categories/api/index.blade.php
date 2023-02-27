@@ -1,4 +1,4 @@
-@extends('api/plantilla')
+@extends('plantilla')
 @section('content')
     <h1 class="pb-2">Categories</h1>
 

@@ -9,7 +9,7 @@ use App\Models\Category;
 use Validator;
 
 
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     public function index()
     {
@@ -117,7 +117,7 @@ class categoryController extends Controller
     public function update(Request $request, $id)
     {
 
-        // Buscar planeta
+        // Buscar Categoria
         $categoria = Category::find($id);
 
         if ($categoria == null) {
@@ -157,7 +157,7 @@ class categoryController extends Controller
 
         $response = [
             'success' => true,
-            'message' => "CAtegoria actualitzada correctament",
+            'message' => "Categoria actualitzada correctament",
             'data' => $categoria,
         ];
         return response()->json($response, 200);

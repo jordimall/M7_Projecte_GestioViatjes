@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('register', [RegisterController::class, 'register']);
+
+Route::post('login', [RegisterController::class, 'login']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -24,3 +29,6 @@ Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
 Route::resource('/home', App\Http\Controllers\api\homeController::class);
 Route::resource('/publications', App\Http\Controllers\api\publicationController::class);
 
+Route::get('/login', function () {
+    return "Has de validar-te com a usuari!";
+})->name("login");

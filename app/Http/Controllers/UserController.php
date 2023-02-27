@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *

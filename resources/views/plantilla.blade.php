@@ -16,7 +16,7 @@
 <body>
     <nav class="p-1 navbar navbar-expand-lg navbar-dark bg-dark d-flex align-content-center">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
+            <a class="navbar-brand" href="{{ url('/home') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                     @endauth
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/publications') }}">Publicacions</a>
+                        <a class="nav-link" href="{{ url('/taulapublicacions') }}">Publicacions</a>
                     </li>
 
                 </ul>

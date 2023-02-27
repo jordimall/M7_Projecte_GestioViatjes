@@ -9,7 +9,7 @@ use App\Models\Category;
 use Validator;
 
 
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     public function index()
     {
@@ -116,7 +116,6 @@ class categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $categoria = Category::find($id);
 
         if ($categoria == null) {

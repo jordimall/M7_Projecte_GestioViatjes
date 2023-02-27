@@ -101,7 +101,12 @@ class publicationController extends Controller
      */
     public function show($id)
     {
+
         $publication = Publication::find($id);
+        $publication->load('categories');
+        $publication->load('user');
+        $publication->load('comments');
+
         if ($publication == null) {
             $response = [
                 'success' => false,

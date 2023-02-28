@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
         Route::get('/taulausers', function () {
             return view('users.api.index');
         });
+        Route::get('/showApi/{idUser}', function () {
+            return view('users.api.show');
+        });
+
         Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
         Route::get('/users/edit/{user}',[UserController::class, 'edit']);
         Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');

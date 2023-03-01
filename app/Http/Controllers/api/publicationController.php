@@ -103,10 +103,8 @@ class publicationController extends Controller
     {
 
         $publication = Publication::find($id);
-        $publication->load('categories');
-        $publication->load('user');
-        $publication->load('comments');
-        $publication->load('comments')->load('user');
+        $publication->load('categories','user','comments');
+        $publication->comments->load('user');
 
         if ($publication == null) {
             $response = [

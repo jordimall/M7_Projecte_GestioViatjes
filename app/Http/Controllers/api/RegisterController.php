@@ -45,7 +45,7 @@ class RegisterController extends Controller
         $user = User::create($input);
 
         // Creem un token per al nou usuari
-        $data['token'] =  $user->createToken('MyApp')->plainTextToken;
+        $data['token'] =  $user->createToken('token')->plainTextToken;
         $data['name'] =  $user->name;
         $data['id'] =  $user->id;
         $data['role'] =  $user->role;
@@ -70,7 +70,7 @@ class RegisterController extends Controller
 
             $user = Auth::user();
 
-            $data['token'] =  $user->createToken('MyApp')->plainTextToken;
+            $data['token'] =  $user->createToken('token')->plainTextToken;
             $data['name'] =  $user->name;
             $data['id'] =  $user->id;
             $data['role'] =  $user->role;

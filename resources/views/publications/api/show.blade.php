@@ -53,18 +53,18 @@
             <div class="row pt-4" id="formComment">
                 <div class="fs-4">
                     <strong class="pl-5">Comentaris</strong>
-                    <form action="" method="POST">
 
                         <div class="form-group">
                             <label for="description">Escriu el comentari</label>
-                            <textarea class="form-control" name="description" rows="3"></textarea>
+                            <textarea class="form-control" name="description" id="inputComment" rows="3"></textarea>
                         </div>
+
+                        <div id="errors" class="alert alert-danger" role="alert"></div>
 
                         <div class="form-group mt-3 mb-3">
-                            <button type="submit" class="btn btn-dark">Comenta</button>
+                            <button type="submit" class="btn btn-dark" id="buttonComenta">Comenta</button>
                         </div>
 
-                    </form>
                 </div>
             </div>
 
@@ -114,6 +114,11 @@
             const id = window.location;
             const url = 'http://localhost:8000/api/publications' + id.pathname.substring(18);
             const urlComment = 'http://localhost:8000/api/comments';
+            const inputComment = document.getElementById('inputComment');
+            const buttonComenta = document.getElementById('buttonComenta');
+            buttonComenta.addEventListener('click',saveComentari);
+            const divErrors = document.getElementById('errors');
+        divErrors.style.display = 'none';
 
             async function loadIntoContainer() {
                 try {
@@ -151,7 +156,7 @@
 
                     const divFormComment = document.getElementById('formComment');
 
-                    console.log(publicacio)
+                    console.log(publicacio);
 
                     publicacio.comments.forEach(comment => {
                         let divRow = document.createElement('div');
@@ -165,79 +170,82 @@
 
                         let span = document.createElement('span');
                         span.setAttribute('class', 'text-primary');
-                        span.innerText = `@${comment.user_id}`;
+                        span.innerText = `@${comment.user.username}`;
 
                         pComment.appendChild(span);
                         pComment.innerHTML += ' ' + comment.description;
 
                         divCol.appendChild(pComment);
                         divRow.appendChild(divCol);
-                        if (comment.user_id == localStorage.id) {
-                            let divColMenu = document.createElement('div');
-                            divColMenu.setAttribute('class', 'col');
 
-                            let ul = document.createElement('ul');
-                            ul.setAttribute('class', 'navbar-nav');
-                            divColMenu.appendChild(ul);
+                        // Falta if
 
-                            let li = document.createElement('li');
-                            ul.appendChild(li);
+                        let divColMenu = document.createElement('div');
+                        divColMenu.setAttribute('class', 'col');
+                        divRow.appendChild(divColMenu);
 
-                            let aIcon = document.createElement('a');
-                            aIcon.setAttribute('class', 'nav-link');
-                            aIcon.setAttribute('id', 'navbarDropdown');
-                            aIcon.setAttribute('href', '#');
-                            aIcon.setAttribute('role', 'button');
-                            aIcon.setAttribute('data-bs-toggle', 'dropdown');
-                            aIcon.setAttribute('aria-haspopup', 'true');
-                            aIcon.setAttribute('aria-expanded', 'false');
-                            aIcon.setAttribute('v-pre', '');
-                            li.appendChild(aIcon);
+                        let ul = document.createElement('ul');
+                        ul.setAttribute('class', 'navbar-nav');
+                        divColMenu.appendChild(ul);
 
-                            let svg = document.createElement('svg');
-                            svg.setAttribute('class', 'bi bi-pencil-square');
-                            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-                            svg.setAttribute('width', '16');
-                            svg.setAttribute('height', '16');
-                            svg.setAttribute('fill', 'currentColor');
-                            svg.setAttribute('viewBox', '0 0 16 16');
-                            aIcon.appendChild(svg);
+                        let li = document.createElement('li');
+                        ul.appendChild(li);
 
-                            let pathPrincipal = document.createElement('path');
-                            pathPrincipal.setAttribute('d',
-                                'M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 ' +
-                                '0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'
-                                );
-                            svg.appendChild(pathPrincipal);
+                        let aIcon = document.createElement('a');
+                        aIcon.setAttribute('class', 'nav-link');
+                        aIcon.setAttribute('id', 'navbarDropdown');
+                        aIcon.setAttribute('href', '#');
+                        aIcon.setAttribute('role', 'button');
+                        aIcon.setAttribute('data-bs-toggle', 'dropdown');
+                        aIcon.setAttribute('aria-haspopup', 'true');
+                        aIcon.setAttribute('aria-expanded', 'false');
+                        aIcon.setAttribute('v-pre', '');
+                        li.appendChild(aIcon);
+
+                        let svg = document.createElement('svg');
+                        svg.setAttribute('class', 'bi bi-pencil-square');
+                        svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                        svg.setAttribute('width', '16');
+                        svg.setAttribute('height', '16');
+                        svg.setAttribute('fill', 'currentColor');
+                        svg.setAttribute('viewBox', '0 0 16 16');
 
 
-                            let pathSecundari = document.createElement('path');
-                            pathSecundari.setAttribute('fill-rule', 'evenodd');
-                            pathSecundari.setAttribute('d',
-                                'M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5' +
-                                ' 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'
-                                );
-                            svg.appendChild(pathSecundari);
-
-                            let divMenu = document.createElement('div');
-                            divMenu.setAttribute('class', 'dropdown-menu');
-                            divMenu.setAttribute('aria-labelledby', 'navbarDropdown');
-                            divColMenu.appendChild(divMenu);
-
-                            let aUpdate = document.createElement('a');
-                            aUpdate.setAttribute('class','dropdown-item');
-                            aUpdate.setAttribute('href','');
-                            aUpdate.innerText='Modificar';
-                            divMenu.appendChild(aUpdate);
-
-                            let aDelete = document.createElement('a');
-                            aDelete.setAttribute('class','dropdown-item');
-                            aDelete.setAttribute('href','');
-                            aDelete.innerText='Eliminar';
-                            divMenu.appendChild(aDelete);
+                        let pathPrincipal = document.createElement('path');
+                        pathPrincipal.setAttribute('d',
+                            'M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 ' +
+                            '0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'
+                        );
+                        svg.appendChild(pathPrincipal);
 
 
-                        }
+                        let pathSecundari = document.createElement('path');
+                        pathSecundari.setAttribute('fill-rule', 'evenodd');
+                        pathSecundari.setAttribute('d',
+                            'M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5' +
+                            ' 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'
+                        );
+                        svg.appendChild(pathSecundari);
+
+                        aIcon.innerHTML = svg.outerHTML;
+
+                        let divMenu = document.createElement('div');
+                        divMenu.setAttribute('class', 'dropdown-menu');
+                        divMenu.setAttribute('aria-labelledby', 'navbarDropdown');
+
+                        li.appendChild(divMenu);
+
+                        let aUpdate = document.createElement('a');
+                        aUpdate.setAttribute('class', 'dropdown-item');
+                        aUpdate.setAttribute('href', '');
+                        aUpdate.innerText = 'Modificar';
+                        divMenu.appendChild(aUpdate);
+
+                        let aDelete = document.createElement('a');
+                        aDelete.setAttribute('class', 'dropdown-item');
+                        aDelete.setAttribute('href', '');
+                        aDelete.innerText = 'Eliminar';
+                        divMenu.appendChild(aDelete);
 
                         divFormComment.appendChild(divRow);
 
@@ -248,9 +256,43 @@
                 }
             }
 
+            async function saveComentari() {
+
+                var newComentari = {
+                    "name": inputComment.value
+                }
+
+                try {
+                    const response = await fetch(urlComment, {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json', // En quin format envio l'informació.
+                            'Accept': 'application/json' // En quin format accepto l'informació.
+                        },
+                        body: JSON.stringify(newComentari)
+                    });
+
+                    const data = await response.json();
+
+                    console.log(data);
+
+                    divErrors.innerHTML = "";
+
+                    if (response.ok) {
+                        divErrors.style.display = 'none';
+                        afegirFila(data.data);
+                    } else {
+                        divErrors.style.display = 'block';
+                        showErrors(data.data);
+                    }
+                } catch (error) { // Errors de xarxa
+                    errors.innerHTML = "S'ha produit un error inesperat";
+                }
+            }
+
             async function getToken() {
                 try {
-                    const response = await fetch('http://127.0.0.0:8000/token');
+                    const response = await fetch('http://localhost:8000/token');
                     const json = await response.json();
                     window.localStorage.setItem('token', json.token);
                     // localStorage.setItem('myCat','Tom');

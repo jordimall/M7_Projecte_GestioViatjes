@@ -43,7 +43,7 @@ Route::get('/token',function(Request $request){
 
     if(auth()->check()){
         auth()->user()->tokens()->delete(); //esborra tots els tokens del usuari de la base de dades.
-        $token = auth()->user()->createToken('prova');
+        $token = auth()->user()->createToken('token');
         return response()->json(['token'=> $token->plainTextToken],200);
     }else{
         return response()->json('Not authorized',405);

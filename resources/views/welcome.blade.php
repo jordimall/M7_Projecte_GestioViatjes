@@ -46,7 +46,7 @@
                     h3.innerText = publicacio.title;
                     h3.className = 'pt-2';
                     const pDescripcio = document.createElement('p');
-                    pDescripcio.innerText = publicacio.description.slice(0,95)+'...';
+                    pDescripcio.innerText = publicacio.description.slice(0, 95) + '...';
                     pDescripcio.className = 'pb-2';
                     const pData = document.createElement('p');
                     pData.className = 'card-text';
@@ -57,7 +57,7 @@
                     const a = document.createElement('a');
                     a.setAttribute('href', 'http://localhost:8000/taulapublicacions/' + publicacio.id);
                     a.className = 'w-100 btn btn-dark';
-                    a.innerText='Mostrar'
+                    a.innerText = 'Mostrar'
                     divCardBody.appendChild(h3);
                     divCardBody.appendChild(pDescripcio);
                     divCardBody.appendChild(pData);

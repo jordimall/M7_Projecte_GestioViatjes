@@ -2,84 +2,31 @@
 
 @section('content')
 
-    <div id="llistat-usuaris">
+    <h1 class="pb-2">Usuaris</h1>
+    
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <td style="border-radius:5px 0 0 0;" scope="col" class="text-center">ID</td>
+                <td scope="col" class="text-center">Nom</td>
+                <td scope="col" class="text-center">Cognoms</td>
+                <td scope="col" class="text-center">Username</td>
+                <td scope="col" class="text-center">Email</td>
+                <td scope="col" class="text-center">Creació</td>
+                <td scope="col" class="text-center">Actualització</td>
+                <td scope="col" class="text-center" style="border-radius:0 5px 0 0;">Operacions</td>
+            </tr>
+        </thead>
+        <tbody id="taula">
 
-        <h1 class="pb-2">Usuaris</h1>
-        
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <td style="border-radius:5px 0 0 0;" scope="col" class="text-center">ID</td>
-                    <td scope="col" class="text-center">Nom</td>
-                    <td scope="col" class="text-center">Cognoms</td>
-                    <td scope="col" class="text-center">Username</td>
-                    <td scope="col" class="text-center">Email</td>
-                    <td scope="col" class="text-center">Creació</td>
-                    <td scope="col" class="text-center">Actualització</td>
-                    <td scope="col" class="text-center" style="border-radius:0 5px 0 0;">Operacions</td>
-                </tr>
-            </thead>
-            <tbody id="taula">
+        </tbody>
+    </table>
 
-            </tbody>
-        </table>
+    <nav class="mt-2">
+        <ul id="pagination" class="pagination">
 
-        <nav class="mt-2">
-            <ul id="pagination" class="pagination">
-
-            </ul>
-        </nav>
-
-    </div>
-
-    <div id="show-user">
-
-        <h1 class="text-center pb-4">Perfil de <span id="nomUsuari"></span></h1>
-
-        <div class="container">
-            <div class="row d-flex align-items-center">
-                <div class="col fs-5">
-                    <strong class="pl-5">Nom complet: </strong><span id="nomCompletUsuari"></span><br>
-                </div>
-                <div class="col fs-5">
-                    <strong class="pl-5">Username: </strong><span id="userName"></span><br>
-                </div>
-                <div class="col fs-5">
-                    <strong class="pl-5">Email: </strong><span id="emailUsuari"></span><br>
-                </div>
-                <div class="col">
-                    <a class="btn btn-dark">
-                        Canviar Password
-                    </a>
-                </div>
-            </div>
-            
-            <div class="row">
-
-                <div class="row row-cols-1 row-cols-md-4 g-4">
-                    {{-- @foreach ($user->publication as $publication)
-                        <div class="col">
-                            <div class="card" style="width: 18rem;">
-                                <img src="{{ asset($publication->url) }}" class="card-img-top" alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $publication->title }}</h5>
-                                    <p class="card-text">{{ Str::limit($publication->description, 100) }}</p>
-                                    <p class="card-text">
-                                        <small class="text-muted">
-                                            {{ $publication->created_at->day }}/{{ $publication->created_at->month }}/{{ $publication->created_at->year }}
-                                        </small>
-                                    </p>
-                                    <a href="/publications/show/{{ $publication->id }}" class="w-100 btn btn-dark">Mostrar</a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach --}}
-                </div>
-            </div>
-            
-        </div>
-
-    </div>
+        </ul>
+    </nav>
 
     <script type="text/javascript">
 
@@ -89,12 +36,8 @@
 
         const taula = document.getElementById('taula');
         const pagination = document.getElementById('pagination');
-        const llistatUsuaris = document.getElementById('llistat-usuaris');
-        const showUser = document.getElementById('show-user');
 
-        async function loadIntoTable(url) {
-
-            showUser.style.display = "none";
+        async function carregarTaulaUsuaris(url) {
 
             try {
                 // Crida de tipus GET de la URL que conté un JSON amb tots els usuaris 
@@ -215,7 +158,7 @@
 
             const a = document.createElement("a");
             a.innerHTML = link.label;
-            a.addEventListener('click', function (event) { paginate(link.url) });
+            a.addEventListener('click', function (event) { paginacio(link.url) });
             a.classList.add('page-link');
             a.setAttribute('href','#');
 
@@ -223,10 +166,10 @@
             pagination.appendChild(li);
         }
 
-        function paginate(url) {
+        function paginacio(url) {
             pagination.innerHTML = "";
             taula.innerHTML = "";
-            loadIntoTable(url);
+            carregarTaulaUsuaris(url);
         }
 
         async function mostrarUsuari(event) {
@@ -234,61 +177,13 @@
             const id = event.target.closest('tr').id;
             window.location.href='/showApi/' + id;
 
-            // try {
-            //     const id = event.target.closest('tr').id;
-            //     const response = await fetch(url + "/" + id, { 
-            //         method: 'GET' // Crida al mètode SHOW
-            //     });
-            //     const json = await response.json();
-            //     if (response.ok) { // codi 200, ...
-            //         llistatUsuaris.innerHTML = "";
-            //         carregarUsuari(json.data);
-            //     } else {
-            //         console.log('Error al mostrar un usuari');
-            //     }
-            // } catch (error) {
-            //     console.log('Error xarxa');
-            // }
-
-        }
-
-        async function carregarUsuari(usuari) {
-
-            llistatUsuaris.style.display = "none";
-            showUser.style.display = "block";
-
-            const nomUsuari = document.getElementById("nomUsuari");
-            nomUsuari.textContent = usuari.name;
-
-            const nomCompletUsuari = document.getElementById("nomCompletUsuari");
-            nomCompletUsuari.textContent = usuari.name + " " + usuari.surname;
-
-            const userName = document.getElementById("userName");
-            userName.textContent = usuari.username;
-
-            const emailUsuari = document.getElementById("emailUsuari");
-            emailUsuari.textContent = usuari.email;
-            
-            try {
-                // La url va directament a la carpeta '/routes/api' i dintre busca la ruta '/publications/publication'
-                // Crida de tipus GET de la URL que conté un JSON amb totes les publicacions
-                const response = await fetch('http://localhost:8000/api/publications'); // mètode 'index' del controller
-                const json = await response.json();
-                const publicacions = json.data; // Recupero la taula de publicacions al fer el all()
-                const publicacionsUsuari = publicacions.filter(publicacio => publicacio.user_id == usuari.id);
-                console.log(publicacionsUsuari);
-                // publicacions.forEach(publicacio => afegirPublicacio(publicacio));
-            } catch(error) {
-                errors.innerHTML = "No es pot accedir a la base de dades";
-            }
-            
         }
 
         function actualitzarUsuari() {  }
 
         function esborrarUsuari() {  }
 
-        loadIntoTable(url);
+        carregarTaulaUsuaris(url);
 
     </script>
 

@@ -35,8 +35,7 @@
 <script type="text/javascript">
     
     // Recupero el id de l'usuari de la URL
-    let url = window.location['pathname'].split('/');
-    let id = url[2];
+    let id = (window.location['pathname'].split('/'))[2];
 
     async function carregarDadesUsuari() {
 
@@ -123,7 +122,11 @@
         targeta.appendChild(bodyTargeta);
         columna.appendChild(targeta);
         publicacions.appendChild(columna);
-        
+
+    }
+
+    function canviarpassword() {
+        window.location.href='/changePasswordApi/' + id;
     }
 
     carregarDadesUsuari();

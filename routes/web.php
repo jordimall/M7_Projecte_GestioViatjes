@@ -43,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
     // Controladors Users
     Route::post('/users/show/{user}',[UserController::class, 'show']);
     Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
+    Route::get('/changePasswordApi/{idUser}', function () {
+        return view('users.api.changePassword');
+    });
     Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::post('/users/edit/{user}',[UserController::class, 'edit'])->name('userEdit');
     Route::post('/users/update/{user}',[UserController::class, 'update'])->name('userUpdate');

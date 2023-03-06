@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
     <nav class="p-1 navbar navbar-expand-lg navbar-dark bg-dark d-flex align-content-center">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
@@ -28,7 +29,7 @@
                     @auth
                         @if (Auth::user()->role == 'admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/taulausers') }}">Usuaris</a>
+                                <a class="nav-link" href="{{ url('/users/api/taulausers') }}">Usuaris</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/taulacomments') }}">Comentaris</a>
@@ -78,12 +79,12 @@
                                         @csrf
                                     </form>
 
-                                    <a class="dropdown-item" href="/users/show/{{ Auth::user()->id }}"
+                                    <a class="dropdown-item" href="/users/api/show/{{ Auth::user()->id }}"
                                         onclick="event.preventDefault();
                                         document.getElementById('perfil-form').submit();">
                                         {{ __('Perfil') }}
                                     </a>
-                                    <form id="perfil-form" action="/users/show/{{ Auth::user()->id }}" method="POST"
+                                    <form id="perfil-form" action="/users/api/show/{{ Auth::user()->id }}" method="POST"
                                         class="d-none">
                                         @csrf
                                     </form>
@@ -118,7 +119,6 @@
             Travel Time - Tots els drets reservats {{ now()->year }} &copy;
         </p>
     </footer>
-
 
 </body>
 

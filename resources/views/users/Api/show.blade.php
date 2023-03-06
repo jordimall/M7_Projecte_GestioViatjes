@@ -35,7 +35,7 @@
 <script type="text/javascript">
     
     // Recupero el id de l'usuari de la URL
-    let id = (window.location['pathname'].split('/'))[2];
+    let id = (window.location['pathname'].split('/'))[4];
 
     async function carregarDadesUsuari() {
 
@@ -86,7 +86,7 @@
         targeta.style = "width: 18rem";
         
         const imatge = document.createElement('img');
-        imatge.setAttribute('src', "../" + publicacio.url);
+        imatge.setAttribute('src', "../../../" + publicacio.url);
         imatge.className = "card-img-top";
         
         const bodyTargeta = document.createElement('div');

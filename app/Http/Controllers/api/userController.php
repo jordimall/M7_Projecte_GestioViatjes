@@ -38,8 +38,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
+
         $user = User::find($id);
         $user->load("publication"); // Carrega les publicacions de l'usuari. (mètode publication del model user)
 
@@ -59,6 +59,7 @@ class UserController extends Controller
             'data' => $user
         ];
         return response()->json($response, 200); // OK
+        
     }
 
     /**

@@ -42,6 +42,9 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
     // Controladors Users
     Route::post('/users/show/{user}',[UserController::class, 'show']);
+    Route::post('/users/api/show/{idUser}', function () {
+        return view('users.api.show');
+    });
     Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
     Route::get('/changePasswordApi/{idUser}', function () {
         return view('users.api.changePassword');
@@ -67,13 +70,13 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
         // Controladors Users
         Route::get('/users',[UserController::class, 'index'])->name('users.index');
-        Route::get('/taulausers', function () {
+        Route::get('/users/api/taulausers', function () {
             return view('users.api.index');
         });
-        Route::get('/showApi/{idUser}', function () {
+        Route::get('/users/api/show/{idUser}', function () {
             return view('users.api.show');
         });
-
+        
         Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
         Route::get('/users/edit/{user}',[UserController::class, 'edit']);
         Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');

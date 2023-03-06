@@ -175,11 +175,13 @@
         async function mostrarUsuari(event) {
 
             const id = event.target.closest('tr').id;
-            window.location.href='/showApi/' + id;
+            window.location.href = `/users/api/show/${id}`;
 
         }
 
-        function actualitzarUsuari() {  }
+        function actualitzarUsuari() {
+            const id = event.target.closest('tr').id;
+        }
 
         function esborrarUsuari() {  }
 

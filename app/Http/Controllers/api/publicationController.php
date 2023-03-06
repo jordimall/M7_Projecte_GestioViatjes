@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Publication;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class publicationController extends Controller
 {
@@ -27,16 +28,6 @@ class publicationController extends Controller
         // return $response;
 
         return response()->json($response, 200); //200 cap a dalt a funcionat, 400 cap a dalt error, 500 cap a dalt error del servidor
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -64,7 +55,7 @@ class publicationController extends Controller
             $response = [
                 'success' => false,
                 'message' => 'Errors de validació',
-                'data' => $validadtor->errors()->all()
+                'data' => $request->title
             ];
             return response()->json($response, 400);
         }
@@ -122,17 +113,6 @@ class publicationController extends Controller
         ];
 
         return response()->json($response, 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

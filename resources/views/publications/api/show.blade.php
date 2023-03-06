@@ -215,8 +215,6 @@
                 }
             }
 
-
-
             function showErrors(errors) {
 
                 const ul = document.createElement("ul");

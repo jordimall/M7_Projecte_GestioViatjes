@@ -4,7 +4,6 @@
 
         <h1 class="text-center" id="title">Nova publicació</h1>
 
-
         <div class="fs-5 d-flex flex-column">
             <div class="row mb-3">
                 <label for="title">Escriu un titul</label>
@@ -34,29 +33,29 @@
 
             <div id="errors" class="alert alert-danger" role="alert"></div>
         </div>
+
     </div>
 
     <script type="text/javascript">
         const pathname = window.location.pathname;
         const buttonAction = document.getElementById('buttonAction');
         const title = document.getElementById('title');
-        const inputTitle=document.getElementById('inputTitle');
-        const inputSubtitle=document.getElementById('inputSubtitle');
-        const textAreaDescription=document.getElementById('textAreaDescription');
+        const inputTitle = document.getElementById('inputTitle');
+        const inputSubtitle = document.getElementById('inputSubtitle');
+        const textAreaDescription = document.getElementById('textAreaDescription');
         const inputFile = document.getElementById('inputFile');
+        const inputs = document.getElementsByTagName("input");
+        var url;
 
         const urlCategory = 'http://localhost:8000/api/categories';
         loadIntoCategory();
 
-        const categories = document.querySelectorAll('input[name="categories[]"]');
-        console.log(categories)
-
         if (pathname == "/taulapublicacions/new") {
-            const url = 'http://localhost:8000/api/publications';
+            url = 'http://localhost:8000/api/publications';
             buttonAction.addEventListener('click', savePublication);
         } else {
             const idPublication = pathname.slice(pathname.lastIndexOf('/'));
-            const url = 'http://localhost:8000/api/publications' + idPublication;
+            url = 'http://localhost:8000/api/publications' + idPublication;
             buttonAction.addEventListener('click', editPublication);
             title.innerText = 'Actualitzar publicació';
             omplirCamps(url);
@@ -95,57 +94,80 @@
             const publication = json.data;
 
             inputTitle.setAttribute('value', publication.title);
-            inputSubtitle.setAttribute('value',publication.subtitle);
-            textAreaDescription.setAttribute('value',publication.description);
+            inputSubtitle.setAttribute('value', publication.subtitle);
+            textAreaDescription.setAttribute('value', publication.description);
 
-            publication.categories.forEach(category=>{
+            publication.categories.forEach(category => {
                 const input = document.getElementById(category.id);
-                input.setAttribute('checked','');
+                input.setAttribute('checked', '');
             })
 
 
         }
-        async function savePublication() {
-            var newPublication = {
-                    "title": inputTitle.value,
-                    "subtitle": inputSubtitle.value,
-                    "description": textAreaDescription.value,
-                    "categories": categories.filter(element=>{
-                        if(element.checked) return element.value;
-                    })
-                }
 
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-type': 'application/json', // En quin format envio l'informació.
-                            'Accept': 'application/json' // En quin format accepto l'informació.
-                        },
-                        body: JSON.stringify(newPublication)
-                    });
-                    const data = await response.json();
-
-                    divErrors.innerHTML = "";
-
-                    if (response.ok) {
-                        divErrors.style.display = 'none';
-                        window.location.href=url;
-
-                    } else {
-                        divErrors.style.display = 'block';
-                        showErrors(data.data);
-                    }
-                } catch (error) { // Errors de xarxa
-                    errors.innerHTML = "S'ha produit un error inesperat";
-                    console.log(error)
-                }
+        function comprovaChecked() {
+            let categories = [];
+            for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "checkbox" && inputs[i].checked) categories.push(inputs[i].value);
             }
+
+            return categories;
+        }
+        async function savePublication() {
+            let categories = comprovaChecked();
+
+            var newPublication = {
+                "title": inputTitle.value,
+                "subtitle": inputSubtitle.value,
+                "description": textAreaDescription.value,
+                "categories": categories,
+                "img": inputFile.files[0]
+            }
+            console.log(newPublication);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        // 'Content-type': 'application/json',
+                        'Content-type': 'multipart/form-data',
+                        'Accept': 'application/json'
+                    },
+                    // body: JSON.stringify(newPublication)
+                    body: newPublication
+                });
+                const data = await response.json();
+
+                divErrors.innerHTML = "";
+
+                if (response.ok) {
+                    divErrors.style.display = 'none';
+                    window.location.href = url;
+
+                } else {
+                    divErrors.style.display = 'block';
+                    console.log(data.data);
+                    showErrors(data.data);
+                }
+            } catch (error) { // Errors de xarxa
+                errors.innerHTML = "S'ha produit un error inesperat";
+                console.log(error)
+            }
+        }
+
+        function showErrors(errors) {
+            console.log(errors)
+            const ul = document.createElement("ul");
+            for (const error of errors) {
+                const li = document.createElement('li');
+                li.textContent = error;
+                ul.appendChild(li);
+            }
+            divErrors.appendChild(ul);
+
+        }
 
 
         async function editPublication() {}
-
-
-
     </script>
 @endsection

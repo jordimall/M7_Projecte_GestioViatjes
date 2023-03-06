@@ -2,7 +2,7 @@
 @section('content')
     <h1 class="pb-2">Publicacions</h1>
 
-    <a href="#" class="btn btn-primary btn-dark">Crea publicació</a>
+    <a href="http://localhost:8000/taulapublicacions/new" class="btn btn-primary btn-dark">Crea publicació</a>
 
     <div class="row row-cols-1 row-cols-md-4 g-4 pt-4" id="container">
 

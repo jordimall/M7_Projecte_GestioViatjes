@@ -102,7 +102,7 @@ class publicationController extends Controller
     {
 
         $publication = Publication::find($id);
-        $publication->load('categories','user','comments');
+        $publication->load('categories', 'user', 'comments');
         $publication->comments->load('user');
 
         if ($publication == null) {
@@ -216,35 +216,35 @@ class publicationController extends Controller
     public function destroy($id)
     {
         $publication = Publication::find($id);
-        if (auth()->user()->id == $publication->user_id || auth()->user()->role == 'admin') {
-            if ($publication == null) {
-                $response = [
-                    'success' => false,
-                    'message' => 'publication no trobada',
-                    'data' => [],
-                ];
 
-                return response()->json($response, 404);
-            }
+        if ($publication == null) {
+            $response = [
+                'success' => false,
+                'message' => 'publication no trobada',
+                'data' => [],
+            ];
 
-            try {
-                $publication->delete();
+            return response()->json($response, 404);
+        }
 
-                $response = [
-                    'success' => true,
-                    'message' => 'publication esborrada',
-                    'data' => $publication,
-                ];
+        try {
+            $publication->delete();
 
-                return response()->json($response, 200);
-            } catch (\Exception $e) {
-                $response = [
-                    'success' => false,
-                    'message' => 'Error esborrant publication',
-                ];
+            $response = [
+                'success' => true,
+                'message' => 'publication esborrada',
+                'data' => $publication,
+            ];
 
-                return response()->json($response, 400);
-            }
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant publication',
+                'data' => $e
+            ];
+
+            return response()->json($response, 400);
         }
     }
 }

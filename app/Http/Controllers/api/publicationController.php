@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Publication;
-use App\Models\Category;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -216,9 +215,8 @@ class publicationController extends Controller
      */
     public function destroy($id)
     {
-
         $publication = Publication::find($id);
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'admin') {
+        if (auth()->user()->id == $publication->user_id || auth()->user()->role == 'admin') {
             if ($publication == null) {
                 $response = [
                     'success' => false,

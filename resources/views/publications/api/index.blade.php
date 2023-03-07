@@ -1,28 +1,32 @@
 @extends('plantilla')
-
 @section('content')
-    <h1>Blog de Viatges</h1>
+    <h1 class="pb-2">Publicacions</h1>
 
-    <div id="gallery" class="mt-5">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-md-4 g-4" id="contingut">
+    <a href="http://localhost:8000/taulapublicacions/new" class="btn btn-primary btn-dark">Crea publicació</a>
 
-            </div>
-        </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4 pt-4" id="container">
+
     </div>
 
-    <script type="text/javascript">
-        const div = document.getElementById('contingut');
-        const url = 'http://localhost:8000/api/home';
+    <nav class="mt-2">
 
-        async function loadIntoContingut() {
+        <ul id="pagination" class="pagination">
+
+        </ul>
+
+    </nav>
+
+    <script>
+        const div = document.getElementById('container');
+        const url = 'http://localhost:8000/api/publications';
+
+        async function loadIntoContainer() {
             try {
 
                 const response = await fetch(url);
-
                 const json = await response.json();
-                const publicacions = json.data;
-
+                const publicacions = json.data.data;
+                const links = json.data.links;
                 publicacions.forEach(publicacio => {
                     const divCol = document.createElement('div');
                     divCol.className = 'col';
@@ -66,12 +70,48 @@
 
                     div.appendChild(divCol);
 
-
                 });
+                afegirLinks(links);
             } catch (error) {
                 console.log(error)
             }
         }
-        loadIntoContingut();
+
+        function afegirLinks(links) {
+            for (const link of links) {
+                afegirBoto(link);
+            }
+        }
+
+        function afegirBoto(link) {
+            const pagLi = document.createElement('li');
+            pagLi.classList.add('page-item');
+            if (link.url == null) {
+                pagLi.classList.add('disabled');
+            };
+
+            if(link.active == true){
+                pagLi.classList.add('active');
+            };
+
+            const pagAnchor = document.createElement('a');
+            pagAnchor.innerHTML = link.label;
+            pagAnchor.addEventListener('click', function(event) {
+                paginate(link.url)
+            });
+            pagAnchor.classList.add('page-link');
+            pagAnchor.setAttribute('href', '#');
+
+            pagLi.appendChild(pagAnchor);
+            pagination.appendChild(pagLi);
+        }
+
+        function paginate(url) {
+            pagination.innerHTML = '';
+            taula.innerHTML = '';
+            loadIntoTable(url);
+        }
+
+        loadIntoContainer();
     </script>
 @endsection

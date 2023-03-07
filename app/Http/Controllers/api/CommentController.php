@@ -45,10 +45,10 @@ class CommentController extends Controller
         $missatge = $request->all();
         $validator = Validator::make($missatge,
             [
-                'name' => 'required|min:3|max:10',
+                'description' => 'required|min:3',
             ]
         );
-        
+
         // Si els camps no compleixen les validacions, retorna un JSON d'error 400
         if ($validator->fails()) {
             $response = [
@@ -61,7 +61,7 @@ class CommentController extends Controller
 
         // Es crea el comentari i retorna un JSON de codi 200
         $comment = Comment::create($missatge);
-
+        $comment->load('user');
         $response = [
             'success' => true,
             'message' => "Comentari creat correctament",
@@ -71,8 +71,6 @@ class CommentController extends Controller
         return response()->json($response, 200);
 
     }
-
-
 
     /**
      * Actualitza un comentari específic de la base de dades.
@@ -100,10 +98,10 @@ class CommentController extends Controller
         $descripcio = $request->all();
         $validator = Validator::make($descripcio,
             [
-                'name' => 'required|min:3',
+                'description' => 'required|min:3',
             ]
         );
-        
+
         // Si els camps no compleixen les validacions, retorna un JSON d'error 400
         if ($validator->fails()) {
             $response = [
@@ -116,7 +114,7 @@ class CommentController extends Controller
 
         // S'actualitza la descripció del comentari i retorna un JSON de codi 200
         $comment->update($descripcio);
-        
+
         $response = [
             'success' => true,
             'message' => "Comentari actualitzat correctament",

@@ -9,7 +9,7 @@ use App\Models\Category;
 use Validator;
 
 
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     public function index()
     {
@@ -22,15 +22,6 @@ class categoryController extends Controller
         // return $response;
 
         return response()->json($response, 200); //200 cap a dalt a funcionat, 400 cap a dalt error, 500 cap a dalt error del servidor
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
     }
 
     /**
@@ -116,8 +107,6 @@ class categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        // Buscar planeta
         $categoria = Category::find($id);
 
         if ($categoria == null) {
@@ -157,7 +146,7 @@ class categoryController extends Controller
 
         $response = [
             'success' => true,
-            'message' => "CAtegoria actualitzada correctament",
+            'message' => "Categoria actualitzada correctament",
             'data' => $categoria,
         ];
         return response()->json($response, 200);

@@ -209,12 +209,11 @@
                     buttonComenta.addEventListener('click', store = function(event) {
                         saveComentari(user, idPublication)
                     });
+                    inputComment.value = '';
                     buttonComenta.innerText = 'Comenta';
                     divButton.removeChild(buttonReset);
                 }
             }
-
-
 
             function showErrors(errors) {
 
@@ -328,9 +327,11 @@
                     });
                     const json = await response.json();
                     if (response.ok) { // codi 200, ....
-                        window.location.hash('/home');
+                        window.location = 'http://localhost:8000/taulapublicacions';
                     } else {
-                        console.log('Error esborrant')
+                        console.log('Error esborrant');
+
+                        console.log(json.data);
                     }
 
                 } catch (error) {

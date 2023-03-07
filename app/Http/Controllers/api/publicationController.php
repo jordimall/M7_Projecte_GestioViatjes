@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Publication;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class publicationController extends Controller
 {
@@ -27,16 +28,6 @@ class publicationController extends Controller
         // return $response;
 
         return response()->json($response, 200); //200 cap a dalt a funcionat, 400 cap a dalt error, 500 cap a dalt error del servidor
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -64,7 +55,7 @@ class publicationController extends Controller
             $response = [
                 'success' => false,
                 'message' => 'Errors de validació',
-                'data' => $validadtor->errors()->all()
+                'data' => $request->title
             ];
             return response()->json($response, 400);
         }
@@ -102,7 +93,7 @@ class publicationController extends Controller
     {
 
         $publication = Publication::find($id);
-        $publication->load('categories','user','comments');
+        $publication->load('categories', 'user', 'comments');
         $publication->comments->load('user');
 
         if ($publication == null) {
@@ -122,17 +113,6 @@ class publicationController extends Controller
         ];
 
         return response()->json($response, 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -216,35 +196,35 @@ class publicationController extends Controller
     public function destroy($id)
     {
         $publication = Publication::find($id);
-        if (auth()->user()->id == $publication->user_id || auth()->user()->role == 'admin') {
-            if ($publication == null) {
-                $response = [
-                    'success' => false,
-                    'message' => 'publication no trobada',
-                    'data' => [],
-                ];
 
-                return response()->json($response, 404);
-            }
+        if ($publication == null) {
+            $response = [
+                'success' => false,
+                'message' => 'publication no trobada',
+                'data' => [],
+            ];
 
-            try {
-                $publication->delete();
+            return response()->json($response, 404);
+        }
 
-                $response = [
-                    'success' => true,
-                    'message' => 'publication esborrada',
-                    'data' => $publication,
-                ];
+        try {
+            $publication->delete();
 
-                return response()->json($response, 200);
-            } catch (\Exception $e) {
-                $response = [
-                    'success' => false,
-                    'message' => 'Error esborrant publication',
-                ];
+            $response = [
+                'success' => true,
+                'message' => 'publication esborrada',
+                'data' => $publication,
+            ];
 
-                return response()->json($response, 400);
-            }
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant publication',
+                'data' => $e
+            ];
+
+            return response()->json($response, 400);
         }
     }
 }

@@ -31,6 +31,14 @@ Route::get('/taulapublicacions', function (){
     return view('publications.api.index');
 });
 
+Route::get('/taulapublicacions/new', function (){
+    return view('publications.api.createUpdate');
+});
+
+Route::get('/taulapublicacions/edit/{id}', function (){
+    return view('publications.api.createUpdate');
+});
+
 Route::get('/taulapublicacions/{id}', function (){
     return view('publications.api.show');
 });

@@ -51,8 +51,8 @@
         const url = 'http://localhost:8000/api/users/';
 
         // Recupero el id de l'usuari de la URL
-        let id = (window.location['pathname'].split('/'))[2];
-
+        let id = (window.location['pathname'].split('/'))[4];
+        
         let error = document.getElementById('error');
 
         async function canviarPassword() {
@@ -65,10 +65,9 @@
                 let nouPassword = {
                     "password": password
                 }
-
+                
                 try {
-
-                    const response = await fetch(url + id, {
+                    const response = await fetch(url + "changePassword/" + id, {
                         method: 'PUT', // Crida al mètode UPDDATE
                         headers: {
                             'Content-type': 'application/json', // tipus de contingut que enviem al servidor
@@ -76,9 +75,9 @@
                         },
                         body: JSON.stringify(nouPassword) // converteix un json a string, p. ex: "{'password' : '123456'}"
                     });
-
+                    console.log(response);
                     if (response.ok) { // codi 200, ...
-                        window.location.href='/showApi/' + id;
+                        window.location.href='/users/api/show/' + id;
                     } else {
                         console.log('Error actualitzant password');
                     }

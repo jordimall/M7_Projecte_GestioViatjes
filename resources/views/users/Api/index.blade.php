@@ -180,7 +180,10 @@
         }
 
         function actualitzarUsuari() {
+            
             const id = event.target.closest('tr').id;
+            window.location.href = `/users/api/update/${id}`;
+
         }
 
         function esborrarUsuari() {  }

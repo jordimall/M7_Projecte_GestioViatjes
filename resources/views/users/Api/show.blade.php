@@ -126,7 +126,7 @@
     }
 
     function canviarpassword() {
-        window.location.href='/changePasswordApi/' + id;
+        window.location.href='/users/api/changePasswordApi/' + id;
     }
 
     carregarDadesUsuari();

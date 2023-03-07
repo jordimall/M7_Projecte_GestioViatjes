@@ -69,8 +69,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {   
+    public function changePassword(Request $request, $id) {   
+        
         // Buscar usuari
         $user = User::find($id);
 
@@ -110,6 +110,7 @@ class UserController extends Controller
             'data' => $user
         ];
         return response()->json($response, 200);
+
     }
 
 }

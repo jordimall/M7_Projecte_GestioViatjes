@@ -46,12 +46,15 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
         return view('users.api.show');
     });
     Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
-    Route::get('/changePasswordApi/{idUser}', function () {
+    Route::get('/users/api/changePasswordApi/{idUser}', function () {
         return view('users.api.changePassword');
     });
     Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::post('/users/edit/{user}',[UserController::class, 'edit'])->name('userEdit');
     Route::post('/users/update/{user}',[UserController::class, 'update'])->name('userUpdate');
+    Route::get('/users/api/update/{idUser}', function () {
+        return view('users.api.update');
+    });
 
     // Controlador Publicactions
     Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');

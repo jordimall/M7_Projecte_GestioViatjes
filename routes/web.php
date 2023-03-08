@@ -70,10 +70,19 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
     // Controladors Users
     Route::post('/users/show/{user}',[UserController::class, 'show']);
+    Route::post('/users/api/show/{idUser}', function () {
+        return view('users.api.show');
+    });
     Route::get('/users/passwordConfirmation/{user}',[UserController::class, 'showPasswordConfirmation']);
+    Route::get('/users/api/changePasswordApi/{idUser}', function () {
+        return view('users.api.changePassword');
+    });
     Route::post('/users/updatePassword/{user}',[UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::post('/users/edit/{user}',[UserController::class, 'edit'])->name('userEdit');
     Route::post('/users/update/{user}',[UserController::class, 'update'])->name('userUpdate');
+    Route::get('/users/api/update/{idUser}', function () {
+        return view('users.api.update');
+    });
 
     // Controlador Publicactions
     Route::get('/publications/formnew',[PublicationController::class, 'create'])->name('publications.formnew');
@@ -92,9 +101,13 @@ Route::group(['middleware' => 'auth'], function () { // usuari autentificat
 
         // Controladors Users
         Route::get('/users',[UserController::class, 'index'])->name('users.index');
-        Route::get('/taulausers', function () {
+        Route::get('/users/api/taulausers', function () {
             return view('users.api.index');
         });
+        Route::get('/users/api/show/{idUser}', function () {
+            return view('users.api.show');
+        });
+        
         Route::get('/users/show/{user}',[UserController::class, 'show'])->name('users.show');
         Route::get('/users/edit/{user}',[UserController::class, 'edit']);
         Route::get('/users/delete/{user}',[UserController::class, 'destroy'])->name('users.destroy');

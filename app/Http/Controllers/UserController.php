@@ -48,7 +48,7 @@ class UserController extends Controller
         if(auth()->user()->id == $user->id){
             return view('users.update', compact('user'));
         }
-        return view('welcom');
+        return view('welcome');
     }
 
     public function update(Request $request, $id)

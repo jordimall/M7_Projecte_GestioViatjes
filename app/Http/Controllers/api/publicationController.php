@@ -54,7 +54,6 @@ class publicationController extends Controller
                 'img' => 'required | mimes: jpeg,png,jpg,webp'
             ]
         );
-        // 'data' => $validadtor->errors()->all()
 
         if ($validadtor->fails()) {
             $response = [
@@ -133,7 +132,7 @@ class publicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update2(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $publication = Publication::find($id);
 
@@ -152,11 +151,10 @@ class publicationController extends Controller
         $input['subtitle'] = $request->input('subtitle');
         $input['description'] = $request->input('description');
         $input['categories'] = $request->input('categories');
-        //$input['user_id'] = $request->input('user_id');
 
         if ($request->hasFile('img')) {
             $input['img'] = $request->file('img');
-          }
+        }
 
         $validator = Validator::make(
             $input,
@@ -164,8 +162,8 @@ class publicationController extends Controller
                 'title' => 'required | min:3',
                 'subtitle' => 'required | min:3',
                 'description' => 'required | min:3',
-               // 'categories' => 'required',
-                // 'img' => 'mimes: jpeg,png,jpg,webp'
+                'categories' => 'required',
+                'img' => 'mimes: jpeg,png,jpg,webp'
             ]
         );
 
@@ -173,28 +171,28 @@ class publicationController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Error de validació",
-                 'data' => $validator->errors()->all(),
-                //'data' => $request->all(),
+                'data' => $validator->errors()->all(),
+
             ];
             return response()->json($response, 400);
         }
-/*
-        $file = $input['img'];
-        if (empty($file)) {
+
+
+        if (!isset($input['img'])) {
             $input['url'] = $publication->url;
         } else {
-            //obtenemos el nombre del archivo
-            $nombre =  time() . "_" . $file->getClientOriginalName();
+            // obtenemos el nombre del archivo
+            $nombre =  time() . "_" . $input['img']->getClientOriginalName();
             $input['url'] = 'url_image/' . $nombre;
-            //indicamos que queremos guardar un nuevo archivo en el disco local
-            Storage::disk('url')->put($nombre,  File::get($file));
+            // indicamos que queremos guardar un nuevo archivo en el disco local
+            Storage::disk('url')->put($nombre,  File::get($input['img']));
         }
-*/
+
         // Versió 1 però perillosa :/
         $publication->update($input);
         $publication->save();
-       // $publication->categories()->detach($publication->categories);
-      //  $publication->categories()->attach(explode(',', $input['categories']));
+        $publication->categories()->detach($publication->categories);
+        $publication->categories()->attach(explode(',', $input['categories']));
 
         // Versió 2 no perillosa 🙂
         // $categoria->name = $input->name;

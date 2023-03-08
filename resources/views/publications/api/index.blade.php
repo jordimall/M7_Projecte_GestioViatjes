@@ -19,8 +19,9 @@
     <script>
         const div = document.getElementById('container');
         const url = 'http://localhost:8000/api/publications';
+        const pagination = document.getElementById('pagination');
 
-        async function loadIntoContainer() {
+        async function loadIntoContainer(url) {
             try {
 
                 const response = await fetch(url);
@@ -108,10 +109,10 @@
 
         function paginate(url) {
             pagination.innerHTML = '';
-            taula.innerHTML = '';
-            loadIntoTable(url);
+            div.innerHTML = '';
+            loadIntoContainer(url);
         }
 
-        loadIntoContainer();
+        loadIntoContainer(url);
     </script>
 @endsection

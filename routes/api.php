@@ -25,6 +25,6 @@ Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
 Route::resource('/users', App\Http\Controllers\api\UserController::class);
 Route::resource('/home', App\Http\Controllers\api\homeController::class);
 Route::resource('/publications', App\Http\Controllers\api\publicationController::class);
-Route::post('/publications/{id}', [App\Http\Controllers\api\publicationController::class,'update2']);
+Route::post('/publications/{id}', [App\Http\Controllers\api\publicationController::class,'update']);
 Route::put('/users/changePassword/{idUser}',[App\Http\Controllers\api\UserController::class, 'changePassword']);
 

@@ -6,9 +6,9 @@
         <div class="mb-3">
             <input type="text" name="name" id="categoriaNameInput" class="form-control">
         </div>
-        <div class="mb-3">
+        <div class="mb-3" id="divButton">
             <button id="saveButton" class=" btn btn-dark">Guardar</button>
-            <button id="resetButton" class=" btn btn-dark" hidden>Reset</button>
+            {{-- <button id="resetButton" class=" btn btn-dark" hidden>Reset</button> --}}
         </div>
     </div>
 
@@ -50,9 +50,9 @@
 
         const categoriaNameInput = document.getElementById('categoriaNameInput');
         const saveButton = document.getElementById('saveButton');
-        saveButton.addEventListener('click', onSave);
-        const resetButton = document.getElementById('resetButton');
-        resetButton.addEventListener('click', modificarBoto);
+        saveButton.addEventListener('click', saveCategoria);
+        // const resetButton = document.getElementById('resetButton');
+        // resetButton.addEventListener('click', modificarBoto);
 
         const url = 'http://localhost:8000/api/categories';
 
@@ -104,6 +104,7 @@
 
             const updateButton = document.createElement('button');
             updateButton.className += 'btn btn-warning';
+            updateButton.setAttribute('name', 'modificar' + categoria.id);
             updateButton.addEventListener('click', editCategoria);
 
 
@@ -142,7 +143,7 @@
                 pagLi.classList.add('disabled');
             };
 
-            if(link.active == true){
+            if (link.active == true) {
                 pagLi.classList.add('active');
             };
 
@@ -184,10 +185,48 @@
 
         }
 
+        // function modificarBoto() {
+        //     operation = 'inserting';
+        //     resetButton.setAttribute('hidden', '');
+        //     categoriaNameInput.value = '';
+        // }
+
+        function editCategoria(event) {
+            const tr = event.target.closest('tr');
+            const description = tr.getAttribute('name');
+            selectedId = tr.getAttribute('id');
+            categoriaNameInput.value = description;
+            modificarBoto();
+        }
+
+
         function modificarBoto() {
-            operation = 'inserting';
-            resetButton.setAttribute('hidden', '');
-            categoriaNameInput.value = '';
+            const divButton = document.getElementById('divButton');
+            let buttonReset = document.getElementById('reset');
+
+            if (event.target.name != '') {
+                saveButton.removeEventListener('click', saveCategoria);
+                saveButton.addEventListener('click', updateCategoria);
+                saveButton.innerText = 'Modifica';
+                if (!buttonReset) {
+                    buttonReset = document.createElement('button');
+                    buttonReset.setAttribute('class', 'btn btn-dark');
+                    buttonReset.setAttribute('id', 'reset');
+                    buttonReset.addEventListener('click', function(event) {
+                        modificarBoto();
+                    });
+                    buttonReset.innerText = 'Crea comentari';
+                    divButton.appendChild(buttonReset);
+                }
+            } else {
+
+                const buttonReset = document.getElementById('reset')
+                saveButton.removeEventListener('click', updateCategoria);
+                saveButton.addEventListener('click', saveCategoria);
+                categoriaNameInput.value = '';
+                saveButton.innerText = 'Comenta';
+                divButton.removeChild(buttonReset);
+            }
         }
 
         async function saveCategoria() {
@@ -225,17 +264,17 @@
         }
 
 
-        function editCategoria(event, categoria) {
+        // function editCategoria(event, categoria) {
 
-            const tr = event.target.closest('tr');
-            const nom = tr.getAttribute('name');
-            selectedId = tr.getAttribute('id');
-            categoriaNameInput.value = nom;
-            resetButton.removeAttribute('hidden', '');
+        //     const tr = event.target.closest('tr');
+        //     const nom = tr.getAttribute('name');
+        //     selectedId = tr.getAttribute('id');
+        //     categoriaNameInput.value = nom;
+        //     resetButton.removeAttribute('hidden', '');
 
-            operation = 'editing';
+        //     operation = 'editing';
 
-        }
+        // }
 
         async function updateCategoria() {
 

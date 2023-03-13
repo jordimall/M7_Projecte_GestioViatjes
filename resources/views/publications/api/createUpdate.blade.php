@@ -37,7 +37,9 @@
     </div>
 
     <script type="text/javascript">
+
         const pathname = window.location.pathname;
+
         const buttonAction = document.getElementById('buttonAction');
         const title = document.getElementById('title');
         const inputTitle = document.getElementById('inputTitle');
@@ -45,7 +47,7 @@
         const textAreaDescription = document.getElementById('textAreaDescription');
         const inputFile = document.getElementById('inputFile');
         const inputs = document.getElementsByTagName("input");
-        var url;
+        var url,comprobant=true;
 
         const urlCategory = 'http://localhost:8000/api/categories';
         loadIntoCategory();
@@ -58,7 +60,7 @@
             url = 'http://localhost:8000/api/publications' + idPublication;
             buttonAction.addEventListener('click', editPublication);
             title.innerText = 'Actualitzar publicació';
-            omplirCamps(url);
+            comprobant=false;
         }
 
 
@@ -86,6 +88,9 @@
                 divCheckbox.appendChild(div);
 
             });
+
+            if(!comprobant) omplirCamps(url);
+
         }
 
         async function omplirCamps() {

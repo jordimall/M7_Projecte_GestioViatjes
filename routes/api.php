@@ -15,15 +15,32 @@ use App\Http\Controllers\api\RegisterController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // Internament ja estàn definides les rutes per als GET, POST, PUT i DELETE.
-Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
-Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
-Route::resource('/users', App\Http\Controllers\api\UserController::class);
-Route::resource('/home', App\Http\Controllers\api\homeController::class);
-Route::resource('/publications', App\Http\Controllers\api\PublicationController::class);
+// Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
+// Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
+// Route::resource('/users', App\Http\Controllers\api\UserController::class);
+// Route::resource('/home', App\Http\Controllers\api\homeController::class);
+// Route::resource('/publications', App\Http\Controllers\api\PublicationController::class);
+// Route::put('/users/changePassword/{idUser}',[App\Http\Controllers\api\UserController::class, 'changePassword']);
 
-Route::put('/users/changePassword/{idUser}',[App\Http\Controllers\api\UserController::class, 'changePassword']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [RegisterController::class, 'login']);
+Route::get('/logout/{idUser}', [RegisterController::class, 'logout']);
+
+Route::middleware('auth:sanctum')->group( function () {
+	// Internament ja estàn definides les rutes per als GET, POST, PUT i DELETE.
+    Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
+    Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
+    Route::resource('/users', App\Http\Controllers\api\UserController::class);
+    Route::resource('/home', App\Http\Controllers\api\homeController::class);
+    Route::resource('/publications', App\Http\Controllers\api\PublicationController::class);
+    Route::put('/users/changePassword/{idUser}',[App\Http\Controllers\api\UserController::class, 'changePassword']);
+});
+
+Route::get('/login', function () {
+    return "Has de validar-te com a usuari!";
+})->name("login");

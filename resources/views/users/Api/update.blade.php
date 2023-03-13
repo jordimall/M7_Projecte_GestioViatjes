@@ -112,20 +112,20 @@
         }
         
         try {
-            // const response = await fetch(`${url}${id}`, {
-            //     method: 'PUT', // Crida al mètode UPDDATE
-            //     headers: {
-            //         'Content-type': 'application/json', // tipus de contingut que enviem al servidor
-            //         'Accept': 'application/json' // tipus de contingut q es rep del servidor
-            //     },
-            //     body: JSON.stringify(nouPassword) // converteix un json a string, p. ex: "{'password' : '123456'}"
-            // });
-            // console.log(response);
-            // if (response.ok) { // codi 200, ...
-            //     window.location.href='/users/api/show/' + id;
-            // } else {
-            //     console.log('Error actualitzant password');
-            // }
+            const response = await fetch(`${url}${id}`, {
+                method: 'PUT', // Crida al mètode UPDDATE
+                headers: {
+                    'Content-type': 'application/json', // tipus de contingut que enviem al servidor
+                    'Accept': 'application/json' // tipus de contingut q es rep del servidor
+                },
+                body: JSON.stringify(nouPassword) // converteix un json a string, p. ex: "{'password' : '123456'}"
+            });
+
+            if (response.ok) { // codi 200, ...
+                window.location.href='/users/api/show/' + id;
+            } else {
+                console.log('Error actualitzant password');
+            }
 
         } catch (error) { // Aquí vindrà en el cas de que no pugui fer el fetch, per tant serà un error de connexió
             console.log('Error xarxa');

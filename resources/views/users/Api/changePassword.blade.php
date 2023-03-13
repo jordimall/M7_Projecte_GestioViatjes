@@ -75,7 +75,7 @@
                         },
                         body: JSON.stringify(nouPassword) // converteix un json a string, p. ex: "{'password' : '123456'}"
                     });
-                    console.log(response);
+                    
                     if (response.ok) { // codi 200, ...
                         window.location.href='/users/api/show/' + id;
                     } else {

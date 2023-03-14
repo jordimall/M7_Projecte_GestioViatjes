@@ -37,7 +37,9 @@
     </div>
 
     <script type="text/javascript">
+
         const pathname = window.location.pathname;
+
         const buttonAction = document.getElementById('buttonAction');
         const title = document.getElementById('title');
         const inputTitle = document.getElementById('inputTitle');
@@ -45,7 +47,7 @@
         const textAreaDescription = document.getElementById('textAreaDescription');
         const inputFile = document.getElementById('inputFile');
         const inputs = document.getElementsByTagName("input");
-        var url;
+        var url,comprobant=true;
 
         const urlCategory = 'http://localhost:8000/api/categories';
         loadIntoCategory();
@@ -58,7 +60,7 @@
             url = 'http://localhost:8000/api/publications' + idPublication;
             buttonAction.addEventListener('click', editPublication);
             title.innerText = 'Actualitzar publicació';
-            omplirCamps(url);
+            comprobant=false;
         }
 
 
@@ -86,16 +88,19 @@
                 divCheckbox.appendChild(div);
 
             });
+
+            if(!comprobant) omplirCamps(url);
+
         }
 
-        async function omplirCamps(url) {
+        async function omplirCamps() {
             const response = await fetch(url);
             const json = await response.json();
             const publication = json.data;
 
             inputTitle.setAttribute('value', publication.title);
             inputSubtitle.setAttribute('value', publication.subtitle);
-            textAreaDescription.setAttribute('value', publication.description);
+            textAreaDescription.innerText = publication.description;
 
             publication.categories.forEach(category => {
                 const input = document.getElementById(category.id);
@@ -113,40 +118,63 @@
 
             return categories;
         }
+        async function getToken() {
+            try {
+                const response = await fetch('http://localhost:8000/token');
+                const json = await response.json();
+                window.localStorage.setItem('token', json.token);
+                // localStorage.setItem('myCat','Tom');
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        async function getUser() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/user', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': "Bearer " + window.localStorage.getItem("token")
+                    }
+                });
+
+                const json = await response.json();
+                return json;
+
+            } catch (error) {
+                console.log('error');
+            }
+        }
         async function savePublication() {
             let categories = comprovaChecked();
+            await getToken();
+            const user = await getUser();
 
-            var newPublication = {
-                "title": inputTitle.value,
-                "subtitle": inputSubtitle.value,
-                "description": textAreaDescription.value,
-                "categories": categories,
-                "img": inputFile.files[0]
-            }
-            console.log(newPublication);
+            const formData = new FormData();
+            formData.append('img', inputFile.files[0]);
+            formData.append('title', inputTitle.value);
+            formData.append('subtitle', inputSubtitle.value);
+            formData.append('description', textAreaDescription.value);
+            formData.append('categories', categories);
+            formData.append('user_id', user.id);
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        // 'Content-type': 'application/json',
-                        'Content-type': 'multipart/form-data',
-                        'Accept': 'application/json'
-                    },
-                    // body: JSON.stringify(newPublication)
-                    body: newPublication
+                    body: formData
                 });
+
                 const data = await response.json();
 
                 divErrors.innerHTML = "";
 
                 if (response.ok) {
                     divErrors.style.display = 'none';
-                    window.location.href = url;
+                    window.location.href = 'http://localhost:8000/taulapublicacions/' + data.data.id;
 
                 } else {
                     divErrors.style.display = 'block';
-                    console.log(data.data);
                     showErrors(data.data);
                 }
             } catch (error) { // Errors de xarxa
@@ -168,6 +196,36 @@
         }
 
 
-        async function editPublication() {}
+        async function editPublication() {
+            let categories = comprovaChecked();
+
+            const formData = new FormData();
+            formData.append('img', inputFile.files[0]);
+            formData.append('title', inputTitle.value);
+            formData.append('subtitle', inputSubtitle.value);
+            formData.append('description', textAreaDescription.value);
+            formData.append('categories', categories);
+            console.log(formData);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                divErrors.innerHTML = "";
+
+                if (response.ok) {
+                    window.location.href = 'http://localhost:8000/taulapublicacions' + url.slice(url.lastIndexOf('/'));
+                } else {
+                    divErrors.style.display = 'block';
+                    showErrors(data.data);
+                }
+            } catch (error) {
+                errors.innerHTML = "S'ha produit un error inesperat";
+            }
+        }
     </script>
 @endsection

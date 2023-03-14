@@ -321,7 +321,6 @@
 
             async function deletePublication() {
                 try {
-                    console.log(url)
                     const response = await fetch(url, {
                         method: 'DELETE'
                     });
@@ -331,7 +330,6 @@
                     } else {
                         console.log('Error esborrant');
 
-                        console.log(json.data);
                     }
 
                 } catch (error) {
@@ -421,7 +419,6 @@
                     const json = await response.json();
                     if (response.ok) { // codi 200, ....
                         const row = document.getElementById('delete' + id);
-                        console.log(row);
                         row.remove();
                     } else {
                         console.log('Error esborrant')

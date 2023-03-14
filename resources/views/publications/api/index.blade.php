@@ -24,7 +24,15 @@
         async function loadIntoContainer(url) {
             try {
 
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    method: 'GET', // Crida al mètode UPDDATE
+                    headers: {
+                        'Content-type': 'application/json', // tipus de contingut que enviem al servidor
+                        'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    },
+                });
+
                 const json = await response.json();
                 const publicacions = json.data.data;
                 const links = json.data.links;

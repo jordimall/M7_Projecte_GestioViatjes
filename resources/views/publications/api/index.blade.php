@@ -26,7 +26,7 @@
 
                 const response = await fetch(url, {
                     headers: {
-                        'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                        'Accept': 'application/json',
                         'Authorization': 'Bearer ' + window.localStorage.getItem('token')
                     },
                 });

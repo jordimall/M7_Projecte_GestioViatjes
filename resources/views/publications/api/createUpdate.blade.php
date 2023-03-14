@@ -35,9 +35,8 @@
         </div>
 
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script type="text/javascript">
-
         const pathname = window.location.pathname;
 
         const buttonAction = document.getElementById('buttonAction');
@@ -47,7 +46,7 @@
         const textAreaDescription = document.getElementById('textAreaDescription');
         const inputFile = document.getElementById('inputFile');
         const inputs = document.getElementsByTagName("input");
-        var url,comprobant=true;
+        var url, comprobant = true;
 
         const urlCategory = 'http://localhost:8000/api/categories';
         loadIntoCategory();
@@ -60,7 +59,7 @@
             url = 'http://localhost:8000/api/publications' + idPublication;
             buttonAction.addEventListener('click', editPublication);
             title.innerText = 'Actualitzar publicació';
-            comprobant=false;
+            comprobant = false;
         }
 
 
@@ -69,7 +68,12 @@
 
         async function loadIntoCategory() {
             const divCheckbox = document.getElementById('containerCheckbox');
-            const response = await fetch(urlCategory);
+            const response = await fetch(urlCategory, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                },
+            });
             const json = await response.json();
             const categories = json.data.data;
             categories.forEach(category => {
@@ -89,12 +93,17 @@
 
             });
 
-            if(!comprobant) omplirCamps(url);
+            if (!comprobant) omplirCamps(url);
 
         }
 
         async function omplirCamps() {
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                },
+            });
             const json = await response.json();
             const publication = json.data;
 
@@ -118,22 +127,11 @@
 
             return categories;
         }
-        async function getToken() {
-            try {
-                const response = await fetch('http://localhost:8000/token');
-                const json = await response.json();
-                window.localStorage.setItem('token', json.token);
-                // localStorage.setItem('myCat','Tom');
-            } catch (error) {
-                console.log(error);
-            }
-        }
 
         async function getUser() {
             try {
                 const response = await fetch('http://127.0.0.1:8000/api/user', {
                     headers: {
-                        'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         'Authorization': "Bearer " + window.localStorage.getItem("token")
                     }
@@ -143,30 +141,36 @@
                 return json;
 
             } catch (error) {
+                divErrors.innerHTML = "S'ha produit un error inesperat";
                 console.log('error');
             }
         }
+
         async function savePublication() {
             let categories = comprovaChecked();
-            await getToken();
             const user = await getUser();
 
             const formData = new FormData();
-            formData.append('img', inputFile.files[0]);
             formData.append('title', inputTitle.value);
             formData.append('subtitle', inputSubtitle.value);
             formData.append('description', textAreaDescription.value);
             formData.append('categories', categories);
             formData.append('user_id', user.id);
-
+            formData.append('img', inputFile.files[0]);
+            console.log(formData)
             try {
+
                 const response = await fetch(url, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
+                    }
                 });
 
-                const data = await response.json();
 
+                const data = await response.json();
                 divErrors.innerHTML = "";
 
                 if (response.ok) {
@@ -178,8 +182,9 @@
                     showErrors(data.data);
                 }
             } catch (error) { // Errors de xarxa
-                errors.innerHTML = "S'ha produit un error inesperat";
-                console.log(error)
+                divErrors.style.display = 'block';
+
+                divErrors.innerHTML = "S'ha produit un error inesperat";
             }
         }
 
@@ -200,17 +205,20 @@
             let categories = comprovaChecked();
 
             const formData = new FormData();
-            formData.append('img', inputFile.files[0]);
             formData.append('title', inputTitle.value);
             formData.append('subtitle', inputSubtitle.value);
             formData.append('description', textAreaDescription.value);
             formData.append('categories', categories);
-            console.log(formData);
+            formData.append('img', inputFile.files[0]);
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    }
                 });
 
                 const data = await response.json();

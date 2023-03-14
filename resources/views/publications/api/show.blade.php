@@ -227,17 +227,6 @@
 
             }
 
-            async function getToken() {
-                try {
-                    const response = await fetch('http://localhost:8000/token');
-                    const json = await response.json();
-                    window.localStorage.setItem('token', json.token);
-                    // localStorage.setItem('myCat','Tom');
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-
             async function getUser() {
                 try {
                     const response = await fetch('http://127.0.0.1:8000/api/user', {
@@ -258,13 +247,17 @@
 
             async function loadIntoContainer() {
                 try {
-                    await getToken();
                     const user = await getUser();
                     buttonComenta.addEventListener('click', store = function(event) {
                         saveComentari(user, idPublication)
                     });
 
-                    const response = await fetch(url);
+                    const response = await fetch(url, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Authorization': "Bearer " + window.localStorage.getItem("token")
+                        }
+                    });
                     const json = await response.json();
                     const publicacio = json.data;
                     title.innerText = publicacio.title;
@@ -322,7 +315,12 @@
             async function deletePublication() {
                 try {
                     const response = await fetch(url, {
-                        method: 'DELETE'
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'Authorization': "Bearer " + window.localStorage.getItem("token")
+                        }
                     });
                     const json = await response.json();
                     if (response.ok) { // codi 200, ....
@@ -350,8 +348,9 @@
                     const response = await fetch(urlComment, {
                         method: 'POST',
                         headers: {
-                            'Content-type': 'application/json', // En quin format envio l'informació.
-                            'Accept': 'application/json' // En quin format accepto l'informació.
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json',
+                            'Authorization': "Bearer " + window.localStorage.getItem("token")
                         },
                         body: JSON.stringify(newComentari)
                     });
@@ -383,7 +382,8 @@
                         method: 'PUT',
                         headers: {
                             'Content-type': 'application/json',
-                            'Accept': 'application/json'
+                            'Accept': 'application/json',
+                            'Authorization': "Bearer " + window.localStorage.getItem("token")
                         },
                         body: JSON.stringify(updateComentari)
                     });
@@ -414,7 +414,10 @@
                 try {
                     const id = event.target.closest('div').id;
                     const response = await fetch(urlComment + '/' + id, {
-                        method: 'DELETE'
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': "Bearer " + window.localStorage.getItem("token")
+                        },
                     });
                     const json = await response.json();
                     if (response.ok) { // codi 200, ....

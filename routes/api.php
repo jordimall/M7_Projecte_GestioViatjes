@@ -40,8 +40,8 @@ Route::middleware('auth:sanctum')->group( function () {
 	// Internament ja estàn definides les rutes per als GET, POST, PUT i DELETE.
     Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
     Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
-    Route::resource('/users', App\Http\Controllers\api\UserController::class);
     Route::put('/users/changePassword/{idUser}',[App\Http\Controllers\api\UserController::class, 'changePassword']);
+    Route::resource('/users', App\Http\Controllers\api\userController::class);
 
 Route::post('/publications',[PublicationController::class, 'store']);
 Route::post('/publications/{id}',[PublicationController::class, 'update']);
@@ -49,6 +49,10 @@ Route::delete('/publications/{id}',[PublicationController::class, 'destroy']);
 
 });
 
-Route::get('/login', function () {
-    return "Has de validar-te com a usuari!";
-})->name("login");
+// Route::get('/login', function () {
+//     return "Has de validar-te com a usuari!";
+// })->name("login");
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});

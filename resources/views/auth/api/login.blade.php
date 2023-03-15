@@ -13,21 +13,12 @@
             </div>
 
             <div class="pt-4 pb-4 w-50 bg-white shadow bg-white rounded">
-                {{-- <form method="POST" action="/api/login"> --}}
-                    @csrf
 
                     <div class="row mb-3">
                         <label for="email" class="col-md-3 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                         <div class="col-md-8">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus>
                         </div>
                     </div>
 
@@ -35,15 +26,8 @@
                         <label for="password" class="col-md-3 col-form-label text-md-end">{{ __('Password') }}</label>
 
                         <div class="col-md-8">
-                            <input id="password" type="password"
-                                class="form-control @error('password') is-invalid @enderror" name="password" required
-                                autocomplete="current-password">
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input id="password" type="password" class="form-control" required>
+                            <span id="error-login" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -71,7 +55,7 @@
                             @endif
                         </div>
                     </div>
-                {{-- </form> --}}
+
             </div>
 
         </div>
@@ -103,13 +87,19 @@
             let token = await response.json();
 
             if (response.ok) { // codi 200, ...
+
                 window.localStorage.setItem('token',token.data.token);
                 window.localStorage.setItem('name',token.data.name);
                 window.localStorage.setItem('id',token.data.id);
                 window.localStorage.setItem('role',token.data.role);
                 window.location.href = '/taulapublicacions';
+
             } else {
-                console.log('Usuari no autoritzat');
+                let span = document.getElementById('error-login');
+                let strong = document.createElement('strong');
+                strong.className = 'small';
+                strong.innerHTML = "Login o password incorrectes";
+                span.appendChild(strong);
             }
 
         } catch (error) { // Aquí vindrà en el cas de que no pugui fer el fetch, per tant serà un error de connexió

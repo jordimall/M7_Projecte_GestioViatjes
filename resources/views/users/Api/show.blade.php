@@ -114,7 +114,7 @@
 
         const boto = document.createElement('a');
         boto.className = "w-100 btn btn-dark";
-        boto.setAttribute('href', "/publications/api/show/" + publicacio.id);
+        boto.setAttribute('href', "/taulapublicacions/" + publicacio.id);
         boto.textContent = "Mostrar";
 
         data.appendChild(small);

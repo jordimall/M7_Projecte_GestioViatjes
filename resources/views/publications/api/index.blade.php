@@ -2,7 +2,7 @@
 @section('content')
     <h1 class="pb-2">Publicacions</h1>
 
-    <a href="http://localhost:8000/taulapublicacions/new" class="btn btn-primary btn-dark">Crea publicació</a>
+    <button id="botoNewPublicacio" onclick="newPublicacio()" class="btn btn-primary btn-dark">Crea publicació</button>
 
     <div class="row row-cols-1 row-cols-md-4 g-4 pt-4" id="container">
 
@@ -20,6 +20,7 @@
         const div = document.getElementById('container');
         const url = 'http://localhost:8000/api/publications';
         const pagination = document.getElementById('pagination');
+        const botoNewPublicacio = document.getElementById('botoNewPublicacio');
 
         async function loadIntoContainer(url) {
             try {
@@ -117,6 +118,16 @@
             pagination.innerHTML = '';
             div.innerHTML = '';
             loadIntoContainer(url);
+        }
+
+        function newPublicacio() {
+
+            let token = window.localStorage.getItem('token');
+
+            if (token != null) {
+                window.location.href = "http://localhost:8000/taulapublicacions/new";
+            } else window.location.href = "http://localhost:8000/auth/api/login";
+
         }
 
         loadIntoContainer(url);

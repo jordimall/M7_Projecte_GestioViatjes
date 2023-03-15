@@ -160,36 +160,35 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if (auth()->user()->role == 'admin') {
-            $categoria = Category::find($id);
-            if ($categoria == null) {
-                $response = [
-                    'success' => false,
-                    'message' => 'Categoria no trobada',
-                    'data' => [],
-                ];
 
-                return response()->json($response, 404);
-            }
+        $categoria = Category::find($id);
+        if ($categoria == null) {
+            $response = [
+                'success' => false,
+                'message' => 'Categoria no trobada',
+                'data' => [],
+            ];
 
-            try {
-                $categoria->delete();
+            return response()->json($response, 404);
+        }
 
-                $response = [
-                    'success' => true,
-                    'message' => 'Categoria esborrada',
-                    'data' => $categoria,
-                ];
+        try {
+            $categoria->delete();
 
-                return response()->json($response, 200);
-            } catch (\Exception $e) {
-                $response = [
-                    'success' => false,
-                    'message' => 'Error esborrant categoria',
-                ];
+            $response = [
+                'success' => true,
+                'message' => 'Categoria esborrada',
+                'data' => $categoria,
+            ];
 
-                return response()->json($response, 400);
-            }
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'message' => 'Error esborrant categoria',
+            ];
+
+            return response()->json($response, 400);
         }
     }
 }

@@ -97,6 +97,7 @@
             } else {
                 let span = document.getElementById('error-login');
                 let strong = document.createElement('strong');
+                span.innerHTML = "";
                 strong.className = 'small';
                 strong.innerHTML = "Login o password incorrectes";
                 span.appendChild(strong);

@@ -58,7 +58,7 @@
                 afegirLinks(links);
 
             } catch(error) {
-                errors.innerHTML = "No es pot accedir a la base de dades";
+                console.log("No es pot accedir a la base de dades");
             }
 
         }

@@ -338,6 +338,10 @@
 
             async function saveComentari(user, idPublication) {
 
+                let token = window.localStorage.getItem('token');
+
+                if (token == null) window.location.href = "http://localhost:8000/auth/api/login";
+
                 var newComentari = {
                     "description": inputComment.value,
                     "user_id": user.id,

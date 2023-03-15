@@ -25,10 +25,8 @@
             try {
 
                 const response = await fetch(url, {
-                    method: 'GET', // Crida al mètode UPDDATE
                     headers: {
-                        'Content-type': 'application/json', // tipus de contingut que enviem al servidor
-                        'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                        'Accept': 'application/json',
                         'Authorization': 'Bearer ' + window.localStorage.getItem('token')
                     },
                 });

@@ -22,9 +22,9 @@
         <nav class="p-1 navbar navbar-expand-lg navbar-dark bg-dark d-flex align-content-center">
 
             <div class="container">
-                
+
                 <a class="navbar-brand" href="{{ url('/home') }}"><img width="35" src="{{ asset('img/logo_blanc.png') }}" alt="Logotip del blog de viatges"></a>
-                    
+
                     {{-- Secció del menú --}}
                     <ul class="navbar-nav me-auto">
 
@@ -33,7 +33,7 @@
                         </li>
 
                         <div id="menuAdmin" class="navbar-nav me-auto">
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/users/api/taulausers') }}">Usuaris</a>
                             </li>
@@ -87,7 +87,7 @@
         </main>
 
     </div>
-    
+
     <footer class="bg-dark mt-5">
         <p class="text-white p-3 m-0 text-center">Travel Time - Tots els drets reservats {{ now()->year }} &copy;</p>
     </footer>
@@ -96,7 +96,7 @@
 
         // Es recupera el menú que s'ha de mostrar a un usuari no autenticat
         const menuNoLogin = document.getElementById('menuNoLogin');
-    
+
         // S'oculta el menú disponible per a administrador
         const menuAdmin = document.getElementById('menuAdmin');
         menuAdmin.style.display = 'none';
@@ -130,10 +130,11 @@
             if (role == 'admin') {
                 menuAdmin.style.display = 'flex';
             }
-        } else if (window.location.href != 'http://localhost:8000/auth/api/login' && 
-                    window.location.href != 'http://localhost:8000/auth/api/register') {
-            window.location.href = '/auth/api/login';
         }
+        // else if (window.location.href != 'http://localhost:8000/auth/api/login' &&
+        //             window.location.href != 'http://localhost:8000/auth/api/register') {
+        //     window.location.href = '/auth/api/login';
+        // }
 
         async function logout() {
 
@@ -142,9 +143,9 @@
 
             try {
                 const response = await fetch(`http://localhost:8000/api/logout/${id}`);
-                
+
                 if (response.ok) { // codi 200
-                    window.localStorage.clear(); // S'esborra tot el 'Local Storage'.                    
+                    window.localStorage.clear(); // S'esborra tot el 'Local Storage'.
                 } else {
                     console.log('Error fent Logout.');
                 }

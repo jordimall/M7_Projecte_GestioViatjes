@@ -39,8 +39,13 @@
         async function loadIntoTable(url) {
 
             try {
-                // Crida de tipus GET de la URL que conté un JSON amb tots els comentaris 
-                const response = await fetch(url); // mètode 'index' del controller
+                // Crida de tipus GET de la URL que conté un JSON amb tots els comentaris
+                const response = await fetch(url,{
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    }
+                }); // mètode 'index' del controller
                 const json = await response.json();
                 const comments = json.data.data; // Recupero la taula de comentaris al fer el pagination des del controller
                 const links = json.data.links; // Recupero la taula de links al fer el pagination de del controller
@@ -85,7 +90,7 @@
             const createdAt = document.createElement('td');
             createdAt.className = "text-center";
             createdAt.textContent = comment.created_at;
-            
+
             // Cel·la 'Data d'actualització'
             const updatedAt = document.createElement('td');
             updatedAt.className = "text-center";
@@ -112,7 +117,7 @@
             taula.appendChild(tr);
 
         }
-        
+
         function afegirLinks(links) {
             links.forEach(link => afegirBoto(link));
         }
@@ -151,9 +156,13 @@
             try {
                 // Busca l'element 'tr' més proper per a recuperar el 'id'
                 // També es podria haber fet event.target.parentNode.parentNode.id
-                const id = event.target.closest('tr').id; 
+                const id = event.target.closest('tr').id;
                 const response = await fetch(url + "/" + id, {
-                    method: 'DELETE' // Crida al mètode DESTROY
+                    method: 'DELETE', // Crida al mètode DESTROY
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    }
                 });
                 const json = await response.json();
                 if (response.ok) { // codi 200, ...

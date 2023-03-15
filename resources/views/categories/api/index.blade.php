@@ -8,7 +8,6 @@
         </div>
         <div class="mb-3" id="divButton">
             <button id="saveButton" class=" btn btn-dark">Guardar</button>
-            {{-- <button id="resetButton" class=" btn btn-dark" hidden>Reset</button> --}}
         </div>
     </div>
 
@@ -51,15 +50,18 @@
         const categoriaNameInput = document.getElementById('categoriaNameInput');
         const saveButton = document.getElementById('saveButton');
         saveButton.addEventListener('click', saveCategoria);
-        // const resetButton = document.getElementById('resetButton');
-        // resetButton.addEventListener('click', modificarBoto);
 
         const url = 'http://localhost:8000/api/categories';
 
         async function loadIntoTable(url) {
             try {
 
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    },
+                });
 
                 const json = await response.json();
                 const categories = json.data.data;
@@ -177,20 +179,6 @@
 
         }
 
-        function onSave(event) {
-
-
-            if (operation == 'inserting') saveCategoria();
-            if (operation == 'editing') updateCategoria();
-
-        }
-
-        // function modificarBoto() {
-        //     operation = 'inserting';
-        //     resetButton.setAttribute('hidden', '');
-        //     categoriaNameInput.value = '';
-        // }
-
         function editCategoria(event) {
             const tr = event.target.closest('tr');
             const description = tr.getAttribute('name');
@@ -239,8 +227,9 @@
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
-                        'Content-type': 'application/json', // En quin format envio l'informació.
-                        'Accept': 'application/json' // En quin format accepto l'informació.
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
                     },
                     body: JSON.stringify(newCategoria)
                 });
@@ -263,19 +252,6 @@
             }
         }
 
-
-        // function editCategoria(event, categoria) {
-
-        //     const tr = event.target.closest('tr');
-        //     const nom = tr.getAttribute('name');
-        //     selectedId = tr.getAttribute('id');
-        //     categoriaNameInput.value = nom;
-        //     resetButton.removeAttribute('hidden', '');
-
-        //     operation = 'editing';
-
-        // }
-
         async function updateCategoria() {
 
             var updateCategoria = {
@@ -287,7 +263,8 @@
                     method: 'PUT',
                     headers: {
                         'Content-type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
                     },
                     body: JSON.stringify(updateCategoria)
                 });
@@ -315,7 +292,10 @@
             try {
                 const id = event.target.closest('tr').id;
                 const response = await fetch(url + '/' + id, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    }
                 });
                 const json = await response.json();
                 if (response.ok) { // codi 200, ....

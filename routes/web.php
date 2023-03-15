@@ -58,8 +58,16 @@ Route::get('/auth/api/register', function (){
 
 
 // Users
+Route::get('/users/api/taulausers', function () {
+    return view('users.api.index');
+});
+
 Route::get('/users/api/show/{idUser}', function () {
     return view('users.api.show');
+});
+
+Route::get('/users/api/changePasswordApi/{idUser}', function () {
+    return view('users.api.changePassword');
 });
 
 Route::get('/users/api/update/{idUser}', function () {

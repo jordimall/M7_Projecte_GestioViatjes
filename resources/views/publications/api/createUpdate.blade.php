@@ -37,8 +37,8 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script type="text/javascript">
-        const pathname = window.location.pathname;
 
+        const pathname = window.location.pathname;
         const buttonAction = document.getElementById('buttonAction');
         const title = document.getElementById('title');
         const inputTitle = document.getElementById('inputTitle');
@@ -46,10 +46,11 @@
         const textAreaDescription = document.getElementById('textAreaDescription');
         const inputFile = document.getElementById('inputFile');
         const inputs = document.getElementsByTagName("input");
+        const urlCategory = 'http://localhost:8000/api/categories';
         var url, comprobant = true;
 
-        const urlCategory = 'http://localhost:8000/api/categories';
-        loadIntoCategory();
+        const divErrors = document.getElementById('errors');
+        divErrors.style.display = 'none';
 
         if (pathname == "/taulapublicacions/new") {
             url = 'http://localhost:8000/api/publications';
@@ -62,9 +63,9 @@
             comprobant = false;
         }
 
+        loadIntoCategory();
 
-        const divErrors = document.getElementById('errors');
-        divErrors.style.display = 'none';
+
 
         async function loadIntoCategory() {
             const divCheckbox = document.getElementById('containerCheckbox');

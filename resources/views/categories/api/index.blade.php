@@ -51,6 +51,8 @@
         const saveButton = document.getElementById('saveButton');
         saveButton.addEventListener('click', saveCategoria);
 
+        console.log(window.localStorage.getItem('token'))
+
         const url = 'http://localhost:8000/api/categories';
 
         async function loadIntoTable(url) {
@@ -195,7 +197,7 @@
             if (event.target.name != '') {
                 saveButton.removeEventListener('click', saveCategoria);
                 saveButton.addEventListener('click', updateCategoria);
-                saveButton.innerText = 'Modifica';
+                saveButton.innerText = 'Modificar';
                 if (!buttonReset) {
                     buttonReset = document.createElement('button');
                     buttonReset.setAttribute('class', 'btn btn-dark');
@@ -203,7 +205,7 @@
                     buttonReset.addEventListener('click', function(event) {
                         modificarBoto();
                     });
-                    buttonReset.innerText = 'Crea comentari';
+                    buttonReset.innerText = 'Crea categoria';
                     divButton.appendChild(buttonReset);
                 }
             } else {
@@ -212,7 +214,7 @@
                 saveButton.removeEventListener('click', updateCategoria);
                 saveButton.addEventListener('click', saveCategoria);
                 categoriaNameInput.value = '';
-                saveButton.innerText = 'Comenta';
+                saveButton.innerText = 'Guardar';
                 divButton.removeChild(buttonReset);
             }
         }

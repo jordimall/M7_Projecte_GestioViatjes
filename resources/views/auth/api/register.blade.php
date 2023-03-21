@@ -88,7 +88,7 @@
             const password_confirmation = document.getElementById('password-confirm').value;
 
             if (comprovarPassword(password, password_confirmation)) {
-                
+                console.log('hola');
                 let usuari = {
                     "name": name,
                     "surname": surname,

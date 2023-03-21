@@ -119,6 +119,10 @@
                         window.location.href = '/taulapublicacions';
 
                     } else {
+                        // Esborrar missatges d'error
+                        const spans = document.getElementsByTagName('span');
+                        const arraySpans = [...spans];
+                        arraySpans.forEach( span => span.innerHTML = "");
                         
                         if (token.errors.name) {
                             let span = document.getElementById('name-error');
@@ -157,7 +161,6 @@
 
         function mostrarErrors(errors, span) {
 
-            span.textContent = "";
             errors.forEach(error => {
                 let strong = document.createElement('strong');
                 strong.className = 'small';

@@ -16,7 +16,6 @@ class RegisterController extends Controller
     //
     public function register(Request $request)
     {
-        dd('hola');
         // En $input guardem totes les dades que s'han enviat via POST
         $input = $request->all();
         

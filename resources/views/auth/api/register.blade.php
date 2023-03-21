@@ -88,7 +88,7 @@
             const password_confirmation = document.getElementById('password-confirm').value;
 
             if (comprovarPassword(password, password_confirmation)) {
-                
+                console.log('hola');
                 let usuari = {
                     "name": name,
                     "surname": surname,
@@ -100,7 +100,7 @@
 
                 try {
                     const response = await fetch('/api/register', {
-                        method: 'POST', // Crida al mètode LOGIN
+                        method: 'POST', // Crida al mètode REGISTER
                         headers: {
                             'Content-type': 'application/json', // tipus de contingut que enviem al servidor
                             'Accept': 'application/json' // tipus de contingut q es rep del servidor

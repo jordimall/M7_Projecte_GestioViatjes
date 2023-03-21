@@ -126,7 +126,8 @@
             const json = await response.json();
 
             if (response.ok) { // codi 200, ...
-                window.localStorage.setItem('name',json.data.name);
+                if (id === window.localStorage.getItem('id'))
+                    window.localStorage.setItem('name',json.data.name);
                 window.location.href='/users/api/show/' + id;
             } else {
                 if (json.errors.name) {

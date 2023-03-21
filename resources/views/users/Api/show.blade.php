@@ -36,12 +36,16 @@
     
     // Recupero el id de l'usuari de la URL
     let id = (window.location['pathname'].split('/'))[4];
-
+    
     async function carregarDadesUsuari() {
 
         try {
             const response = await fetch("http://localhost:8000/api/users/" + id, { 
-                method: 'GET' // Crida al mètode SHOW
+                method: 'GET', // Crida al mètode SHOW
+                headers: {
+                    'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                },
             });
             const json = await response.json();
             if (response.ok) { // codi 200, ...
@@ -110,7 +114,7 @@
 
         const boto = document.createElement('a');
         boto.className = "w-100 btn btn-dark";
-        boto.setAttribute('href', "/publications/api/show/" + publicacio.id);
+        boto.setAttribute('href', "/taulapublicacions/" + publicacio.id);
         boto.textContent = "Mostrar";
 
         data.appendChild(small);

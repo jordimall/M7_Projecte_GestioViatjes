@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -20,10 +22,12 @@ class RegisterController extends Controller
 
         // validem les dades rebudes
         $validator = Validator::make($input, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
+            'name' => ['required', 'string', 'max:30'],
+            'surname' => ['required', 'string', 'max:50'],
+            'username' => ['required', 'string', 'min:3', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:60', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required', 'same:password']
         ]);
 
         // Si alguna dada no és correcta
@@ -32,17 +36,22 @@ class RegisterController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Dades usuari incorrectes.",
-                'data' => $validator->errors(),
+                'errors' => $validator->errors(),
+                'input' => $input
             ];
-
             return response()->json($response, 404);
+
         }
 
-        // Encriptem el password
-        $input['password'] = bcrypt($input['password']);
-
         // creem el nou usuari
-        $user = User::create($input);
+        $user = User::create([
+            'name' => $input['name'],
+            'surname' => $input['surname'],
+            'username' => Str::lower($input['username']),
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']), // Encriptem el password
+            'role' => 'normal'
+        ]);
 
         // Creem un token per al nou usuari
         $data['token'] =  $user->createToken('token')->plainTextToken;
@@ -55,7 +64,6 @@ class RegisterController extends Controller
             'success' => true,
             'data'    => $data,
             'message' => "Usuari creat correctament.",
-
         ];
 
         return response()->json($response, 200);
@@ -75,7 +83,6 @@ class RegisterController extends Controller
             $data['id'] =  $user->id;
             $data['role'] =  $user->role;
 
-
             $response = [
                 'success' => true,
                 'data'    => $data,
@@ -91,5 +98,13 @@ class RegisterController extends Controller
         ];
 
         return response()->json($response, 401);
+    }
+
+    public function logout($id)
+    {
+        $user = User::find($id);
+        $user->tokens()->delete(); //esborra tots els tokens del usuari de la base de dades.
+
+        return response()->json('Logout correcte',200);
     }
 }

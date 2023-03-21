@@ -71,11 +71,12 @@
                         method: 'PUT', // Crida al mètode UPDDATE
                         headers: {
                             'Content-type': 'application/json', // tipus de contingut que enviem al servidor
-                            'Accept': 'application/json' // tipus de contingut q es rep del servidor
+                            'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                            'Authorization': 'Bearer ' + window.localStorage.getItem('token')
                         },
                         body: JSON.stringify(nouPassword) // converteix un json a string, p. ex: "{'password' : '123456'}"
                     });
-                    console.log(response);
+                    
                     if (response.ok) { // codi 200, ...
                         window.location.href='/users/api/show/' + id;
                     } else {

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\RegisterController;
+use App\Http\Controllers\api\publicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,21 +16,27 @@ use App\Http\Controllers\api\RegisterController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// Internament ja estàn definides les rutes per als GET, POST, PUT i DELETE.
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [RegisterController::class, 'login']);
+Route::get('/logout/{idUser}', [RegisterController::class, 'logout']);
+Route::get('/publications',[PublicationController::class, 'index']);
+Route::get('/publications/{id}',[PublicationController::class, 'show']);
 Route::resource('/home', App\Http\Controllers\api\homeController::class);
-Route::get('/publications', [App\Http\Controllers\api\publicationController::class, 'index']);
 
-Route::middleware('auth:sanctum')->group(function () {
+
+Route::middleware('auth:sanctum')->group( function () {
+	// Internament ja estàn definides les rutes per als GET, POST, PUT i DELETE.
     Route::resource('/categories', App\Http\Controllers\api\CategoryController::class);
     Route::resource('/comments', App\Http\Controllers\api\CommentController::class);
-    Route::resource('/users', App\Http\Controllers\api\UserController::class);
-    Route::put('/users/changePassword/{idUser}', [App\Http\Controllers\api\UserController::class, 'changePassword']);
+    Route::put('/users/changePassword/{idUser}',[App\Http\Controllers\api\UserController::class, 'changePassword']);
+    Route::resource('/users', App\Http\Controllers\api\userController::class);
 
-    Route::post('/publications', [App\Http\Controllers\api\publicationController::class, 'store']);
-    Route::delete('/publications/{id}', [App\Http\Controllers\api\publicationController::class, 'destroy']);
-    Route::post('/publications/{id}', [App\Http\Controllers\api\publicationController::class, 'update']);
+    Route::post('/publications',[PublicationController::class, 'store']);
+    Route::post('/publications/{id}',[PublicationController::class, 'update']);
+    Route::delete('/publications/{id}',[PublicationController::class, 'destroy']);
+
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });

@@ -18,10 +18,8 @@
                 
                 <label for="name" class="col-md-4 col-form-label text-md-end">Nom: </label>
                 <div class="col-md-6">
-                    <input id="name" type="text" name="name" value="" required autofocus>
-                    <span class="invalid-feedback" role="alert">
-                        <strong id="error"></strong>
-                    </span>
+                    <input id="name" type="text" class="form-control" name="name" value="" required autofocus>
+                    <span id="name-error" class="text-danger"></span>
                 </div>
 
             </div>
@@ -30,10 +28,8 @@
 
                 <label for="surname" class="col-md-4 col-form-label text-md-end">Cognoms: </label>
                 <div class="col-md-6">
-                    <input id="surname" type="text" name="surname" value="" required autofocus>
-                    <span class="invalid-feedback" role="alert">
-                        <strong id="error"></strong>
-                    </span>
+                    <input id="surname" type="text" class="form-control" name="surname" value="" required autofocus>
+                    <span id="surname-error" class="text-danger"></span>
                 </div>
 
             </div>
@@ -42,10 +38,8 @@
 
                 <label for="username" class="col-md-4 col-form-label text-md-end">Username: </label>
                 <div class="col-md-6">
-                    <input id="username" type="text" name="username" value="" required autofocus>
-                    <span class="invalid-feedback" role="alert">
-                        <strong></strong>
-                    </span>
+                    <input id="username" type="text" class="form-control" name="username" value="" required autofocus>
+                    <span id="username-error" class="text-danger"></span>
                 </div>
             </div>
 
@@ -71,9 +65,15 @@
     async function carregarDadesUsuari() {
 
         try {
-            const response = await fetch("http://localhost:8000/api/users/" + id, { 
-                method: 'GET' // Crida al mètode SHOW
+
+            const response = await fetch(url + id, { 
+                method: 'GET', // Crida al mètode SHOW
+                headers: {
+                    'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                },
             });
+
             const json = await response.json();
             if (response.ok) { // codi 200, ...
                 mostrarDadesUsuari(json.data);
@@ -99,7 +99,7 @@
 
     }
 
-    function actualitzarUsuari() {
+    async function actualitzarUsuari() {
         
         const name = document.getElementById('name').value;
         const surname = document.getElementById('surname').value;
@@ -112,24 +112,55 @@
         }
         
         try {
-            // const response = await fetch(`${url}${id}`, {
-            //     method: 'PUT', // Crida al mètode UPDDATE
-            //     headers: {
-            //         'Content-type': 'application/json', // tipus de contingut que enviem al servidor
-            //         'Accept': 'application/json' // tipus de contingut q es rep del servidor
-            //     },
-            //     body: JSON.stringify(nouPassword) // converteix un json a string, p. ex: "{'password' : '123456'}"
-            // });
-            // console.log(response);
-            // if (response.ok) { // codi 200, ...
-            //     window.location.href='/users/api/show/' + id;
-            // } else {
-            //     console.log('Error actualitzant password');
-            // }
+
+            const response = await fetch('http://localhost:8000/api/users/' + id, {
+                method: 'PUT', // Crida al mètode UPDDATE
+                headers: {
+                    'Content-type': 'application/json', // tipus de contingut que enviem al servidor
+                    'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                },
+                body: JSON.stringify(usuariActualitzat) // converteix un json a string, p. ex: "{'password' : '123456'}"
+            });
+
+            const json = await response.json();
+
+            if (response.ok) { // codi 200, ...
+                window.localStorage.setItem('name',json.data.name);
+                window.location.href='/users/api/show/' + id;
+            } else {
+                if (json.errors.name) {
+                    console.log('name');
+                    let span = document.getElementById('name-error');
+                    mostrarErrors(json.errors.name, span);
+                }
+                if (json.errors.surname) {
+                    console.log('surname');
+                    let span = document.getElementById('surname-error');
+                    mostrarErrors(json.errors.surname, span);
+                }
+                if (json.errors.username) {
+                    console.log('username');
+                    let span = document.getElementById('username-error');
+                    mostrarErrors(json.errors.username, span);
+                }
+            }
 
         } catch (error) { // Aquí vindrà en el cas de que no pugui fer el fetch, per tant serà un error de connexió
             console.log('Error xarxa');
         }
+
+    }
+
+    function mostrarErrors(errors, span) {
+
+        span.textContent = "";
+        errors.forEach(error => {
+            let strong = document.createElement('strong');
+            strong.className = 'small';
+            strong.innerHTML = error;
+            span.appendChild(strong);
+        });
 
     }
     

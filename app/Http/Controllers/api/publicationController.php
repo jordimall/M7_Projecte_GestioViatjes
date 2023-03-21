@@ -44,6 +44,7 @@ class publicationController extends Controller
         $input['categories'] = $request->input('categories');
         $input['user_id'] = $request->input('user_id');
         $input['img'] = $request->file('img');
+
         $validadtor = Validator::make(
             $input,
             [
@@ -59,7 +60,8 @@ class publicationController extends Controller
             $response = [
                 'success' => false,
                 'message' => 'Errors de validació',
-                'data' => $validadtor->errors()->all()
+                'data' => $request
+                // 'data' => $validadtor->errors()->all()
             ];
             return response()->json($response, 400);
         }
@@ -171,7 +173,7 @@ class publicationController extends Controller
             $response = [
                 'success' => false,
                 'message' => "Error de validació",
-                'data' => $validator->errors()->all(),
+                'data' => $request,
 
             ];
             return response()->json($response, 400);
@@ -188,20 +190,20 @@ class publicationController extends Controller
             Storage::disk('url')->put($nombre,  File::get($input['img']));
         }
 
-        // Versió 1 però perillosa :/
-        $publication->update($input);
-        $publication->save();
+        $publication->title = $input['title'];
+        $publication->subtitle = $input['subtitle'];
+        $publication->description = $input['description'];
+        $publication->url = $input['url'];
         $publication->categories()->detach($publication->categories);
         $publication->categories()->attach(explode(',', $input['categories']));
-
-        // Versió 2 no perillosa 🙂
-        // $categoria->name = $input->name;
-        // $categoria->save();
+        $publication->save();
 
         $response = [
             'success' => true,
             'message' => "Publicació actualitzada correctament",
             'data' => $publication,
+            'publication' => $publication,
+            'input' => $input,
         ];
         return response()->json($response, 200);
     }

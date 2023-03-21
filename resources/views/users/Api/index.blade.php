@@ -41,7 +41,14 @@
 
             try {
                 // Crida de tipus GET de la URL que conté un JSON amb tots els usuaris 
-                const response = await fetch(url); // mètode 'index' del controller
+                const response = await fetch(url, {
+                    method: 'GET', // Crida al mètode INDEX
+                    headers: {
+                        'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    },
+                });
+
                 const json = await response.json();
                 const users = json.data.data; // Recupero la taula d'usuaris al fer el pagination des del controller
                 const links = json.data.links; // Recupero la taula de links al fer el pagination de del controller
@@ -51,7 +58,7 @@
                 afegirLinks(links);
 
             } catch(error) {
-                errors.innerHTML = "No es pot accedir a la base de dades";
+                console.log("No es pot accedir a la base de dades");
             }
 
         }
@@ -179,14 +186,42 @@
 
         }
 
-        function actualitzarUsuari() {
+        function actualitzarUsuari(event) {
             
             const id = event.target.closest('tr').id;
             window.location.href = `/users/api/update/${id}`;
 
         }
 
-        function esborrarUsuari() {  }
+        async function esborrarUsuari(event) {
+            
+            const id = event.target.closest('tr').id;
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/users/' + id, { 
+                    method: 'DELETE', // Crida al mètode DESTROY
+                    headers: {
+                        'Accept': 'application/json', // tipus de contingut q es rep del servidor
+                        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                    },
+                });
+
+                const json = await response.json();
+
+                if (response.ok) { // codi 200, ...
+
+                    let fila = document.getElementById(id);
+                    fila.remove(); // Elimina un element en HTML
+
+                } else {
+                    console.log('Error esborrant');
+                }
+
+            } catch (error) {
+                console.log('Error xarxa');
+            }
+
+        }
 
         carregarTaulaUsuaris(url);
 

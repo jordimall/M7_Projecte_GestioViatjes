@@ -131,10 +131,6 @@
                 menuAdmin.style.display = 'flex';
             }
         }
-        // else if (window.location.href != 'http://localhost:8000/auth/api/login' &&
-        //             window.location.href != 'http://localhost:8000/auth/api/register') {
-        //     window.location.href = '/auth/api/login';
-        // }
 
         async function logout() {
 
@@ -152,27 +148,20 @@
             } catch (error) { // Aquí vindrà en el cas de que no pugui fer el fetch, per tant serà un error de connexió
                 console.log('Error xarxa');
             }
-            // window.location.href = 'http://localhost:8000/auth/api/login';
             window.location.href = '/taulapublicacions';
 
         }
 
         function showUser() {
-
             // Es recupera l'id que s'ha emmagatzemat al losalstorage des de la vista 'login'
             let id = window.localStorage.getItem('id');
-
             window.location.href = `/users/api/show/${id}`;
-
         }
 
         function showEditProfile() {
-
             // Es recupera l'id que s'ha emmagatzemat al losalstorage des de la vista 'login'
             let id = window.localStorage.getItem('id');
-
             window.location.href = `/users/api/update/${id}`;
-
         }
 
     </script>
